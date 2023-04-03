@@ -232,6 +232,70 @@ class AuthController extends Controller
 
     }
 
+
+/**
+
+ * @OA\Post(
+
+ * path="/api/logout",
+
+ * summary="Logout User",
+
+ * description="Logout User",
+
+ * tags={"Logout"},
+
+ * @OA\RequestBody(
+
+ *    required=true,
+
+ *    description="Provide All Info Below",
+
+ *    @OA\JsonContent(
+
+ *       required={"token","password"},
+
+ *       @OA\Property(property="token", type="string", format="text", example="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZmQ0NGNiNzExMDQ2NzE2ZDgyMTY1MjQ5MzI4NTQ1OTMyZTNkYTY2NDU4MGQyM2Q3MjhmZGQwZTMyZGU3ZThiN2E2MjhmZmY0MjIwZWFlNTYiLCJpYXQiOjE2ODA1MzAwODEuNTUzMjA4MTEyNzE2Njc0ODA0Njg3NSwibmJmIjoxNjgwNTMwMDgxLjU1MzIzMTAwMDkwMDI2ODU1NDY4NzUsImV4cCI6MTY4MDUzMDE0MS41Mjc4OTY4ODExMDM1MTU2MjUsInN1YiI6IjQiLCJzY29wZXMiOltdfQ.ggRpnHYkChn1fXIwJVt35iG64AbROh1XuQqnNP24oaaLNgU3dOC0y0Hkr7D7MCX8LpvMqq_U8hC0MH3CEvAvhJAURBkhqeYU-eAb5BAaNYSwJIQKgvJ_GrMWaGZ1mM2mIIvnV0ly60h821x0iN8Oe4VW8DaA9qOcAtDy94J4wIB4BFt8Zr2y8MMxTcpNG9dBzN1sUOru4TR6ezdI_1H8agSSmL_gcs86TxFJuQodXoRZJSIewMPyiX0PlzyHTVBJvJqnCmHJVDaG1xaEG4YIxLPCsZHbzuiTkeZfIXa8iRId84SksRAU3qbtlqyU5KyssuY65DBSd1B7-YYNCg4X9C8C0TgjHnUY3_4YFGDZHya08Kq5OZZeR2IXol_5of52wyPBm1CmE1VOJ7XFJ05L54dvLfyiVQAIZ6-W0soWGl_mtRilBhj1BQozRHWGV_SpacScV2UYfW0dtZyPHz3sImAzShp8lJaykGZvuzGUa3rYLk0CcOAQey7frenkZqKmqiLTc69ZBqn0yEeEQ3pZOS6tu5kSkDFoh0U_hb8EqvItekvWMFunLgWarpojLWPRrR2UUXDPMRXAkwO7J1pPyL4pKN3xSdVZ9XEjBhVjrnT0GUafIOt9G7ZoikV6LgDDpfZj7CPKvFYhOx69RDCr5OwHs-72-XzwluoKUFDThuo"),
+
+ *    ),
+
+ * ),
+
+ * @OA\Response(
+
+ *    response=200,
+
+ *    description="Logged out successfully",
+
+ *    @OA\JsonContent(
+
+ *       @OA\Property(property="status", type="string", example="Logged out successfully"),
+
+ *        )
+
+ *     ), 
+
+ *   @OA\Response(
+
+ *    response=500,
+
+ *    description="Log Information store failed",
+
+ *    @OA\JsonContent(
+
+ *       @OA\Property(property="status", type="string", example="error"),
+
+ *       @OA\Property(property="message", type="string", example="Some issue found")
+
+ *        )
+
+ *     )
+
+ * )
+
+ */
+
+    
     public function logout(Request $request)
     {
         try {

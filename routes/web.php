@@ -43,6 +43,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     
 
         //$router->get('/getuserdetails', 'PostController@getuserdetails');
+        $router->post('/logout', 'AuthController@logout');
+
 
     });
 
