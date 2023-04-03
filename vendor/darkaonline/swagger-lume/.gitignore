@@ -1,0 +1,11 @@
+.idea
+.phpunit.result.cache
+.DS_Store
+/tests/config
+/tests/public
+/tests/resources
+/tests/storage/api-docs/*
+/tests/storage/logs/*
+/vendor
+/logs
+/composer.lock
