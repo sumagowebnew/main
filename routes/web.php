@@ -19,33 +19,21 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->group(['middleware' => 'cors'], function () use ($router) {
+    $router->group(['prefix' => 'api'], function () use ($router) {
 
-$router->group(['prefix' => 'api'], function () use ($router) {
+        $router->post('/register', 'AuthController@register');
 
- 
+        $router->post('/login', 'AuthController@login');
 
-    $router->post('/register', 'AuthController@register');
+        $router->post('/refresh_token', 'AuthController@refresh_token');
 
- 
+        $router->group(['middleware' => 'auth'], function () use ($router) {
+            //$router->get('/getuserdetails', 'PostController@getuserdetails');
+            $router->post('/logout', 'AuthController@logout');
 
-    $router->post('/login', 'AuthController@login');
 
- 
-
-    $router->post('/refresh_token', 'AuthController@refresh_token');
-
-    
-
- 
-
-    $router->group(['middleware' => 'auth'], function () use ($router) {
-
-    
-
-        //$router->get('/getuserdetails', 'PostController@getuserdetails');
-        $router->post('/logout', 'AuthController@logout');
-
+        });
 
     });
-
 });
