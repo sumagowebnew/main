@@ -125,6 +125,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'N' => 
         array (
             'Nyholm\\Psr7\\' => 12,
+            'Nord\\Lumen\\Cors\\' => 16,
         ),
         'M' => 
         array (
@@ -404,6 +405,10 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         array (
             0 => __DIR__ . '/..' . '/nyholm/psr7/src',
         ),
+        'Nord\\Lumen\\Cors\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -672,6 +677,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExampleController.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\Cors' => __DIR__ . '/../..' . '/app/Http/Middleware/Cors.php',
         'App\\Http\\Middleware\\ExampleMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/ExampleMiddleware.php',
         'App\\Jobs\\ExampleJob' => __DIR__ . '/../..' . '/app/Jobs/ExampleJob.php',
         'App\\Jobs\\Job' => __DIR__ . '/../..' . '/app/Jobs/Job.php',
@@ -3095,6 +3101,10 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'Monolog\\SignalHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/SignalHandler.php',
         'Monolog\\Test\\TestCase' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Test/TestCase.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
+        'Nord\\Lumen\\Cors\\Contracts\\CorsService' => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src/Contracts/CorsService.php',
+        'Nord\\Lumen\\Cors\\CorsMiddleware' => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src/CorsMiddleware.php',
+        'Nord\\Lumen\\Cors\\CorsService' => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src/CorsService.php',
+        'Nord\\Lumen\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src/CorsServiceProvider.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'Nyholm\\Psr7\\Factory\\HttplugFactory' => __DIR__ . '/..' . '/nyholm/psr7/src/Factory/HttplugFactory.php',
         'Nyholm\\Psr7\\Factory\\Psr17Factory' => __DIR__ . '/..' . '/nyholm/psr7/src/Factory/Psr17Factory.php',

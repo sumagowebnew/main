@@ -4228,6 +4228,73 @@
             "install-path": "../nikic/php-parser"
         },
         {
+            "name": "nordsoftware/lumen-cors",
+            "version": "3.5.0",
+            "version_normalized": "3.5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digiaonline/lumen-cors.git",
+                "reference": "a8822a87d1c1aff7c11141c617bd8f37a9c033d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digiaonline/lumen-cors/zipball/a8822a87d1c1aff7c11141c617bd8f37a9c033d9",
+                "reference": "a8822a87d1c1aff7c11141c617bd8f37a9c033d9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.4 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "codeception/assert-throws": "^1.1",
+                "codeception/codeception": "^4.1",
+                "codeception/module-asserts": "^1.3",
+                "codeception/specify": "^1.2",
+                "codeception/verify": "^1.2",
+                "laravel/lumen-framework": "^5.4 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "php-coveralls/php-coveralls": "^2.2",
+                "phpstan/phpstan": "^0.12.2",
+                "phpstan/phpstan-symfony": "^0.12.11"
+            },
+            "time": "2022-03-24T15:05:17+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Nord\\Lumen\\Cors\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christoffer Niska",
+                    "email": "christofferniska@gmail.com"
+                }
+            ],
+            "description": "CORS module for the Lumen PHP framework.",
+            "keywords": [
+                "cors",
+                "cross-origin",
+                "headers",
+                "http",
+                "laravel",
+                "lumen",
+                "preflight",
+                "request",
+                "resource",
+                "sharing"
+            ],
+            "support": {
+                "issues": "https://github.com/digiaonline/lumen-cors/issues",
+                "source": "https://github.com/digiaonline/lumen-cors/tree/3.5.0"
+            },
+            "install-path": "../nordsoftware/lumen-cors"
+        },
+        {
             "name": "nyholm/psr7",
             "version": "1.5.1",
             "version_normalized": "1.5.1.0",
