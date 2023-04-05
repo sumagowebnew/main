@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['middleware' => 'cors_new'], function () use ($router) {
+$router->group(['middleware' => 'cors'], function () use ($router) {
     $router->group(['prefix' => 'api'], function () use ($router) {
 
         $router->post('/register', 'AuthController@register');
