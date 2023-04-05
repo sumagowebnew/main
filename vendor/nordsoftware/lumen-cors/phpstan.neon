@@ -1,0 +1,9 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+
+parameters:
+	level: 7
+	checkMissingIterableValueType: false
+	ignoreErrors:
+		# Ignore Laravel/Lumen incompatibilites
+		- '#Function config_path not found#'
