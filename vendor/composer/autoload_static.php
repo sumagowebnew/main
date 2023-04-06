@@ -64,6 +64,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'p' => 
         array (
             'phpseclib3\\' => 11,
+            'palanik\\lumen\\Middleware\\' => 25,
         ),
         'W' => 
         array (
@@ -125,7 +126,6 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'N' => 
         array (
             'Nyholm\\Psr7\\' => 12,
-            'Nord\\Lumen\\Cors\\' => 16,
         ),
         'M' => 
         array (
@@ -231,6 +231,10 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'phpseclib3\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+        ),
+        'palanik\\lumen\\Middleware\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/palanik/lumen-cors',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -404,10 +408,6 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'Nyholm\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/nyholm/psr7/src',
-        ),
-        'Nord\\Lumen\\Cors\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src',
         ),
         'Monolog\\' => 
         array (
@@ -3101,10 +3101,6 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'Monolog\\SignalHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/SignalHandler.php',
         'Monolog\\Test\\TestCase' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Test/TestCase.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
-        'Nord\\Lumen\\Cors\\Contracts\\CorsService' => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src/Contracts/CorsService.php',
-        'Nord\\Lumen\\Cors\\CorsMiddleware' => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src/CorsMiddleware.php',
-        'Nord\\Lumen\\Cors\\CorsService' => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src/CorsService.php',
-        'Nord\\Lumen\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/nordsoftware/lumen-cors/src/CorsServiceProvider.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'Nyholm\\Psr7\\Factory\\HttplugFactory' => __DIR__ . '/..' . '/nyholm/psr7/src/Factory/HttplugFactory.php',
         'Nyholm\\Psr7\\Factory\\Psr17Factory' => __DIR__ . '/..' . '/nyholm/psr7/src/Factory/Psr17Factory.php',
@@ -5172,6 +5168,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
+        'palanik\\lumen\\Middleware\\LumenCors' => __DIR__ . '/..' . '/palanik/lumen-cors/LumenCors.php',
         'phpseclib3\\Common\\Functions\\Strings' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Common/Functions/Strings.php',
         'phpseclib3\\Crypt\\AES' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
         'phpseclib3\\Crypt\\Blowfish' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Blowfish.php',
