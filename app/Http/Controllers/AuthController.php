@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use App\Models\{
-    Users,
-   
-};
 
 class AuthController extends Controller
 {
