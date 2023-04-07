@@ -209,13 +209,13 @@ public function register(Request $request)
     }
 
     // Check if user already exist
-    if (Users::where('email', '=', $email)->exists()) {
+    if (User::where('email', '=', $email)->exists()) {
         return response()->json(['status' => 'error', 'message' => 'User already exists with this email']);
     }
 
     // Create new user
     try {
-        $user = new Users();
+        $user = new User();
         $user->name = $name;
         $user->email = $email;
         $user->password = app('hash')->make($password);
