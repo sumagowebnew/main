@@ -195,24 +195,24 @@ class AuthController extends Controller
         $password = $request->password;
         // Check if field is not empty
 
-        if (empty($name) or empty($email) or empty($password)) {
-            return response()->json(['status' => 'error', 'message' => 'You must fill all the fields']);
-        }
+        // if (empty($name) or empty($email) or empty($password)) {
+        //     return response()->json(['status' => 'error', 'message' => 'You must fill all the fields']);
+        // }
 
-        // Check if email is valid
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return response()->json(['status' => 'error', 'message' => 'You must enter a valid email']);
-        }
+        // // Check if email is valid
+        // if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //     return response()->json(['status' => 'error', 'message' => 'You must enter a valid email']);
+        // }
 
-        // Check if password is greater than 5 character
-        if (strlen($password) < 6) {
-            return response()->json(['status' => 'error', 'message' => 'Password should be min 6 character']);
-        }
+        // // Check if password is greater than 5 character
+        // if (strlen($password) < 6) {
+        //     return response()->json(['status' => 'error', 'message' => 'Password should be min 6 character']);
+        // }
 
-        // Check if user already exist
-        if (User::where('email', '=', $email)->exists()) {
-            return response()->json(['status' => 'error', 'message' => 'User already exists with this email']);
-        }
+        // // Check if user already exist
+        // if (User::where('email', '=', $email)->exists()) {
+        //     return response()->json(['status' => 'error', 'message' => 'User already exists with this email']);
+        // }
 
         // Create new user
         try {
