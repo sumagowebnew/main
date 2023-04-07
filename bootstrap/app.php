@@ -88,9 +88,7 @@ $app->routeMiddleware([
     'TrimStrings'=>LumenMiddlewareTrimOrConvertString\TrimStrings::class,
     // 'cors_new' =>App\Http\Middleware\CorsMiddleware::class,
     // 'ConvertEmptyStringsToNull'=>LumenMiddlewareTrimOrConvertString\ConvertEmptyStringsToNull::class,
-    // 'cors_new' => App\Http\Middleware\Cors::class,
-    // 'cors_new' => palanik\lumen\Middleware\LumenCors::class,
-    // 'cors_new' => Fruitcake\Cors\HandleCors::class,
+
 
 ]);
 
@@ -113,7 +111,6 @@ $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(App\Providers\TokenTimeServiceProvider::class);
 $app->register(\SwaggerLume\ServiceProvider::class);
-$app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
 
 

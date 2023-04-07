@@ -187,7 +187,6 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         ),
         'F' => 
         array (
-            'Fruitcake\\Cors\\' => 15,
             'Flipbox\\LumenGenerator\\' => 23,
             'Firebase\\JWT\\' => 13,
             'FastRoute\\' => 10,
@@ -587,11 +586,6 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
-        'Fruitcake\\Cors\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
-            1 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
-        ),
         'Flipbox\\LumenGenerator\\' => 
         array (
             0 => __DIR__ . '/..' . '/flipbox/lumen-generator/src/LumenGenerator',
@@ -692,6 +686,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExampleController.php',
+        'App\\Http\\Controllers\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/TestController.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\Cors' => __DIR__ . '/../..' . '/app/Http/Middleware/Cors.php',
         'App\\Http\\Middleware\\CorsMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/CorsMiddleware.php',
@@ -1615,10 +1610,6 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'Flipbox\\LumenGenerator\\Console\\TestMakeCommand' => __DIR__ . '/..' . '/flipbox/lumen-generator/src/LumenGenerator/Console/TestMakeCommand.php',
         'Flipbox\\LumenGenerator\\Console\\TinkerCommand' => __DIR__ . '/..' . '/flipbox/lumen-generator/src/LumenGenerator/Console/TinkerCommand.php',
         'Flipbox\\LumenGenerator\\LumenGeneratorServiceProvider' => __DIR__ . '/..' . '/flipbox/lumen-generator/src/LumenGenerator/LumenGeneratorServiceProvider.php',
-        'Fruitcake\\Cors\\CorsService' => __DIR__ . '/..' . '/fruitcake/php-cors/src/CorsService.php',
-        'Fruitcake\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
-        'Fruitcake\\Cors\\Exceptions\\InvalidOptionException' => __DIR__ . '/..' . '/fruitcake/php-cors/src/Exceptions/InvalidOptionException.php',
-        'Fruitcake\\Cors\\HandleCors' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/HandleCors.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
         'GrahamCampbell\\ResultType\\Result' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Result.php',
         'GrahamCampbell\\ResultType\\Success' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Success.php',
