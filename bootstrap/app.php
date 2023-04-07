@@ -78,16 +78,17 @@ $app->configure('cors');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    // App\Http\Middleware\ExampleMiddleware::class
+    App\Http\Middleware\CorsMiddleware::class
+]);
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'TrimStrings'=>LumenMiddlewareTrimOrConvertString\TrimStrings::class,
-    'cors_new' =>App\Http\Middleware\CorsMiddleware::class,
+    // 'cors_new' =>App\Http\Middleware\CorsMiddleware::class,
     // 'ConvertEmptyStringsToNull'=>LumenMiddlewareTrimOrConvertString\ConvertEmptyStringsToNull::class,
-    // 'cors' => App\Http\Middleware\Cors::class,
+    // 'cors_new' => App\Http\Middleware\Cors::class,
     // 'cors_new' => palanik\lumen\Middleware\LumenCors::class,
     // 'cors_new' => Fruitcake\Cors\HandleCors::class,
 
@@ -137,7 +138,6 @@ $app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
-    'paths' => ['api/*'],
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
     
