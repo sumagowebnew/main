@@ -62,6 +62,7 @@ $app->singleton(
 $app->configure('auth');
 $app->configure('service');
 $app->configure('swagger-lume');
+$app->configure('cors');
 
 
 // $app->configure('mail');
@@ -88,6 +89,8 @@ $app->routeMiddleware([
     // 'ConvertEmptyStringsToNull'=>LumenMiddlewareTrimOrConvertString\ConvertEmptyStringsToNull::class,
     // 'cors' => App\Http\Middleware\Cors::class,
     // 'cors_new' => palanik\lumen\Middleware\LumenCors::class,
+    // 'cors_new' => Fruitcake\Cors\HandleCors::class,
+
 ]);
 
 /*
@@ -109,6 +112,9 @@ $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(App\Providers\TokenTimeServiceProvider::class);
 $app->register(\SwaggerLume\ServiceProvider::class);
+$app->register(Fruitcake\Cors\CorsServiceProvider::class);
+
+
 
 
 
@@ -131,8 +137,10 @@ $app->register(\SwaggerLume\ServiceProvider::class);
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
+    'paths' => ['api/*'],
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
+    
 });
 
 return $app;

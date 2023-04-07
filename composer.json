@@ -9,9 +9,10 @@
         "darkaonline/swagger-lume": "^9.0",
         "dusterio/lumen-passport": "^0.3.6",
         "flipbox/lumen-generator": "^9.2",
+        "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "7.0",
         "laravel/lumen-framework": "^8.3.1",
-        "palanik/lumen-cors": "^0.0.3"
+        "laravelista/lumen-vendor-publish": "^8.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

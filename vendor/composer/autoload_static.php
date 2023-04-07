@@ -64,7 +64,6 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'p' => 
         array (
             'phpseclib3\\' => 11,
-            'palanik\\lumen\\Middleware\\' => 25,
         ),
         'W' => 
         array (
@@ -135,9 +134,12 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         array (
             'League\\Uri\\' => 11,
             'League\\OAuth2\\Server\\' => 21,
+            'League\\MimeTypeDetection\\' => 25,
+            'League\\Flysystem\\' => 17,
             'League\\Event\\' => 13,
             'Lcobucci\\JWT\\' => 13,
             'Lcobucci\\Clock\\' => 15,
+            'Laravelista\\LumenVendorPublish\\' => 31,
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Passport\\Database\\Factories\\' => 36,
             'Laravel\\Passport\\' => 17,
@@ -185,6 +187,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         ),
         'F' => 
         array (
+            'Fruitcake\\Cors\\' => 15,
             'Flipbox\\LumenGenerator\\' => 23,
             'Firebase\\JWT\\' => 13,
             'FastRoute\\' => 10,
@@ -231,10 +234,6 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'phpseclib3\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
-        ),
-        'palanik\\lumen\\Middleware\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/palanik/lumen-cors',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -422,6 +421,14 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         array (
             0 => __DIR__ . '/..' . '/league/oauth2-server/src',
         ),
+        'League\\MimeTypeDetection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
+        ),
+        'League\\Flysystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/flysystem/src',
+        ),
         'League\\Event\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/event/src',
@@ -433,6 +440,10 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'Lcobucci\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/lcobucci/clock/src',
+        ),
+        'Laravelista\\LumenVendorPublish\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravelista/lumen-vendor-publish/src',
         ),
         'Laravel\\SerializableClosure\\' => 
         array (
@@ -576,6 +587,11 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
+        'Fruitcake\\Cors\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
+            1 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
+        ),
         'Flipbox\\LumenGenerator\\' => 
         array (
             0 => __DIR__ . '/..' . '/flipbox/lumen-generator/src/LumenGenerator',
@@ -678,6 +694,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'App\\Http\\Controllers\\ExampleController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExampleController.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\Cors' => __DIR__ . '/../..' . '/app/Http/Middleware/Cors.php',
+        'App\\Http\\Middleware\\CorsMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/CorsMiddleware.php',
         'App\\Http\\Middleware\\ExampleMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/ExampleMiddleware.php',
         'App\\Jobs\\ExampleJob' => __DIR__ . '/../..' . '/app/Jobs/ExampleJob.php',
         'App\\Jobs\\Job' => __DIR__ . '/../..' . '/app/Jobs/Job.php',
@@ -1598,6 +1615,10 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'Flipbox\\LumenGenerator\\Console\\TestMakeCommand' => __DIR__ . '/..' . '/flipbox/lumen-generator/src/LumenGenerator/Console/TestMakeCommand.php',
         'Flipbox\\LumenGenerator\\Console\\TinkerCommand' => __DIR__ . '/..' . '/flipbox/lumen-generator/src/LumenGenerator/Console/TinkerCommand.php',
         'Flipbox\\LumenGenerator\\LumenGeneratorServiceProvider' => __DIR__ . '/..' . '/flipbox/lumen-generator/src/LumenGenerator/LumenGeneratorServiceProvider.php',
+        'Fruitcake\\Cors\\CorsService' => __DIR__ . '/..' . '/fruitcake/php-cors/src/CorsService.php',
+        'Fruitcake\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
+        'Fruitcake\\Cors\\Exceptions\\InvalidOptionException' => __DIR__ . '/..' . '/fruitcake/php-cors/src/Exceptions/InvalidOptionException.php',
+        'Fruitcake\\Cors\\HandleCors' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/HandleCors.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
         'GrahamCampbell\\ResultType\\Result' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Result.php',
         'GrahamCampbell\\ResultType\\Success' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Success.php',
@@ -2733,6 +2754,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'Laravel\\SerializableClosure\\Support\\ReflectionClosure' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Support/ReflectionClosure.php',
         'Laravel\\SerializableClosure\\Support\\SelfReference' => __DIR__ . '/..' . '/laravel/serializable-closure/src/Support/SelfReference.php',
         'Laravel\\SerializableClosure\\UnsignedSerializableClosure' => __DIR__ . '/..' . '/laravel/serializable-closure/src/UnsignedSerializableClosure.php',
+        'Laravelista\\LumenVendorPublish\\VendorPublishCommand' => __DIR__ . '/..' . '/laravelista/lumen-vendor-publish/src/VendorPublishCommand.php',
         'Lcobucci\\Clock\\Clock' => __DIR__ . '/..' . '/lcobucci/clock/src/Clock.php',
         'Lcobucci\\Clock\\FrozenClock' => __DIR__ . '/..' . '/lcobucci/clock/src/FrozenClock.php',
         'Lcobucci\\Clock\\SystemClock' => __DIR__ . '/..' . '/lcobucci/clock/src/SystemClock.php',
@@ -2815,6 +2837,64 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'League\\Event\\ListenerInterface' => __DIR__ . '/..' . '/league/event/src/ListenerInterface.php',
         'League\\Event\\ListenerProviderInterface' => __DIR__ . '/..' . '/league/event/src/ListenerProviderInterface.php',
         'League\\Event\\OneTimeListener' => __DIR__ . '/..' . '/league/event/src/OneTimeListener.php',
+        'League\\Flysystem\\AdapterInterface' => __DIR__ . '/..' . '/league/flysystem/src/AdapterInterface.php',
+        'League\\Flysystem\\Adapter\\AbstractAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractAdapter.php',
+        'League\\Flysystem\\Adapter\\AbstractFtpAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/AbstractFtpAdapter.php',
+        'League\\Flysystem\\Adapter\\CanOverwriteFiles' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/CanOverwriteFiles.php',
+        'League\\Flysystem\\Adapter\\Ftp' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Ftp.php',
+        'League\\Flysystem\\Adapter\\Ftpd' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Ftpd.php',
+        'League\\Flysystem\\Adapter\\Local' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Local.php',
+        'League\\Flysystem\\Adapter\\NullAdapter' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/NullAdapter.php',
+        'League\\Flysystem\\Adapter\\Polyfill\\NotSupportingVisibilityTrait' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Polyfill/NotSupportingVisibilityTrait.php',
+        'League\\Flysystem\\Adapter\\Polyfill\\StreamedCopyTrait' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Polyfill/StreamedCopyTrait.php',
+        'League\\Flysystem\\Adapter\\Polyfill\\StreamedReadingTrait' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Polyfill/StreamedReadingTrait.php',
+        'League\\Flysystem\\Adapter\\Polyfill\\StreamedTrait' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Polyfill/StreamedTrait.php',
+        'League\\Flysystem\\Adapter\\Polyfill\\StreamedWritingTrait' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/Polyfill/StreamedWritingTrait.php',
+        'League\\Flysystem\\Adapter\\SynologyFtp' => __DIR__ . '/..' . '/league/flysystem/src/Adapter/SynologyFtp.php',
+        'League\\Flysystem\\Config' => __DIR__ . '/..' . '/league/flysystem/src/Config.php',
+        'League\\Flysystem\\ConfigAwareTrait' => __DIR__ . '/..' . '/league/flysystem/src/ConfigAwareTrait.php',
+        'League\\Flysystem\\ConnectionErrorException' => __DIR__ . '/..' . '/league/flysystem/src/ConnectionErrorException.php',
+        'League\\Flysystem\\ConnectionRuntimeException' => __DIR__ . '/..' . '/league/flysystem/src/ConnectionRuntimeException.php',
+        'League\\Flysystem\\CorruptedPathDetected' => __DIR__ . '/..' . '/league/flysystem/src/CorruptedPathDetected.php',
+        'League\\Flysystem\\Directory' => __DIR__ . '/..' . '/league/flysystem/src/Directory.php',
+        'League\\Flysystem\\Exception' => __DIR__ . '/..' . '/league/flysystem/src/Exception.php',
+        'League\\Flysystem\\File' => __DIR__ . '/..' . '/league/flysystem/src/File.php',
+        'League\\Flysystem\\FileExistsException' => __DIR__ . '/..' . '/league/flysystem/src/FileExistsException.php',
+        'League\\Flysystem\\FileNotFoundException' => __DIR__ . '/..' . '/league/flysystem/src/FileNotFoundException.php',
+        'League\\Flysystem\\Filesystem' => __DIR__ . '/..' . '/league/flysystem/src/Filesystem.php',
+        'League\\Flysystem\\FilesystemException' => __DIR__ . '/..' . '/league/flysystem/src/FilesystemException.php',
+        'League\\Flysystem\\FilesystemInterface' => __DIR__ . '/..' . '/league/flysystem/src/FilesystemInterface.php',
+        'League\\Flysystem\\FilesystemNotFoundException' => __DIR__ . '/..' . '/league/flysystem/src/FilesystemNotFoundException.php',
+        'League\\Flysystem\\Handler' => __DIR__ . '/..' . '/league/flysystem/src/Handler.php',
+        'League\\Flysystem\\InvalidRootException' => __DIR__ . '/..' . '/league/flysystem/src/InvalidRootException.php',
+        'League\\Flysystem\\MountManager' => __DIR__ . '/..' . '/league/flysystem/src/MountManager.php',
+        'League\\Flysystem\\NotSupportedException' => __DIR__ . '/..' . '/league/flysystem/src/NotSupportedException.php',
+        'League\\Flysystem\\PluginInterface' => __DIR__ . '/..' . '/league/flysystem/src/PluginInterface.php',
+        'League\\Flysystem\\Plugin\\AbstractPlugin' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/AbstractPlugin.php',
+        'League\\Flysystem\\Plugin\\EmptyDir' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/EmptyDir.php',
+        'League\\Flysystem\\Plugin\\ForcedCopy' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/ForcedCopy.php',
+        'League\\Flysystem\\Plugin\\ForcedRename' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/ForcedRename.php',
+        'League\\Flysystem\\Plugin\\GetWithMetadata' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/GetWithMetadata.php',
+        'League\\Flysystem\\Plugin\\ListFiles' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/ListFiles.php',
+        'League\\Flysystem\\Plugin\\ListPaths' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/ListPaths.php',
+        'League\\Flysystem\\Plugin\\ListWith' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/ListWith.php',
+        'League\\Flysystem\\Plugin\\PluggableTrait' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/PluggableTrait.php',
+        'League\\Flysystem\\Plugin\\PluginNotFoundException' => __DIR__ . '/..' . '/league/flysystem/src/Plugin/PluginNotFoundException.php',
+        'League\\Flysystem\\ReadInterface' => __DIR__ . '/..' . '/league/flysystem/src/ReadInterface.php',
+        'League\\Flysystem\\RootViolationException' => __DIR__ . '/..' . '/league/flysystem/src/RootViolationException.php',
+        'League\\Flysystem\\SafeStorage' => __DIR__ . '/..' . '/league/flysystem/src/SafeStorage.php',
+        'League\\Flysystem\\UnreadableFileException' => __DIR__ . '/..' . '/league/flysystem/src/UnreadableFileException.php',
+        'League\\Flysystem\\Util' => __DIR__ . '/..' . '/league/flysystem/src/Util.php',
+        'League\\Flysystem\\Util\\ContentListingFormatter' => __DIR__ . '/..' . '/league/flysystem/src/Util/ContentListingFormatter.php',
+        'League\\Flysystem\\Util\\MimeType' => __DIR__ . '/..' . '/league/flysystem/src/Util/MimeType.php',
+        'League\\Flysystem\\Util\\StreamHasher' => __DIR__ . '/..' . '/league/flysystem/src/Util/StreamHasher.php',
+        'League\\MimeTypeDetection\\EmptyExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/EmptyExtensionToMimeTypeMap.php',
+        'League\\MimeTypeDetection\\ExtensionMimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/ExtensionMimeTypeDetector.php',
+        'League\\MimeTypeDetection\\ExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/ExtensionToMimeTypeMap.php',
+        'League\\MimeTypeDetection\\FinfoMimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/FinfoMimeTypeDetector.php',
+        'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
+        'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
+        'League\\MimeTypeDetection\\OverridingExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/OverridingExtensionToMimeTypeMap.php',
         'League\\OAuth2\\Server\\AuthorizationServer' => __DIR__ . '/..' . '/league/oauth2-server/src/AuthorizationServer.php',
         'League\\OAuth2\\Server\\AuthorizationValidators\\AuthorizationValidatorInterface' => __DIR__ . '/..' . '/league/oauth2-server/src/AuthorizationValidators/AuthorizationValidatorInterface.php',
         'League\\OAuth2\\Server\\AuthorizationValidators\\BearerTokenValidator' => __DIR__ . '/..' . '/league/oauth2-server/src/AuthorizationValidators/BearerTokenValidator.php',
@@ -5168,7 +5248,6 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
-        'palanik\\lumen\\Middleware\\LumenCors' => __DIR__ . '/..' . '/palanik/lumen-cors/LumenCors.php',
         'phpseclib3\\Common\\Functions\\Strings' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Common/Functions/Strings.php',
         'phpseclib3\\Crypt\\AES' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
         'phpseclib3\\Crypt\\Blowfish' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/Crypt/Blowfish.php',
