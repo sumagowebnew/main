@@ -26,7 +26,9 @@ $router->post('/login', 'AuthController@login');
 $router->post('/refresh_token', 'AuthController@refresh_token');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
-//$router->get('/getuserdetails', 'PostController@getuserdetails');
+$router->get('/contact/get-all-record', 'ContactEnquiriesController@getAllRecord');
+$router->get('/contact/get-add', 'ContactEnquiriesController@getAdd');
+$router->get('/get-all-record', 'ContactEnquiriesController@getAllRecord');
 $router->post('/logout', 'AuthController@logout');
 
 

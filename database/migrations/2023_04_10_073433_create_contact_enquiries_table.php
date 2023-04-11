@@ -14,7 +14,12 @@ class CreateContactEnquiriesTable extends Migration
     public function up()
     {
         Schema::create('contact_enquiries', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('mobile_no');
+            $table->string('email');
+            $table->string('messege');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
