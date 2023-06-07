@@ -5,82 +5,98 @@ namespace App\Http\Controllers;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class PortfolioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function add(Request $request)
     {
-        //
+
+     $portfolio = new Portfolio();
+     $portfolio->title = $request->title;
+     $portfolio->description = $request->description;
+     $portfolio->website_link = $request->website_link;
+
+        try{
+
+            $img_path = $request->image_file;
+
+                $folderPath = "uploads/portfolio/";
+                
+                $base64Image = explode(";base64,", $img_path);
+                //dd($base64Image);
+                $explodeImage = explode("image/", $base64Image[0]);
+                //dd($explodeImage);
+                $imageType = $explodeImage[1];
+
+                //dd($imageType);
+                $image_base64 = base64_decode($base64Image[1]);
+                //dd($image_base64);
+                $posts = Portfolio::get();
+                $file = $posts->last()->id .'.'. $imageType;
+                // $file = uniqid() .'.'. $imageType;
+                $file_dir = $folderPath . $file;
+                
+                file_put_contents($file_dir, $image_base64);
+                $portfolio->image = $file;
+            
+            $portfolio->save();
+
+            //return response()->json($client_logo);
+            return response()->json(['status' => 'Success', 'message' => 'Portfolio added successfully']);
+
+            
+        }
+
+        catch (exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+    }    
+
+    public function update(Request $request, $id)
+    {
+        $portfolio_data = Portfolio::find($id);
+        $portfolio_data->title = $request->title;
+        $portfolio_data->description = $request->description;
+        $portfolio_data->website_link = $request->website_link;
+        
+        $img_path = $request->image_file;
+
+                $folderPath = "uploads/portfolio/";
+                
+                $base64Image = explode(";base64,", $img_path);
+                //dd($base64Image);
+                $explodeImage = explode("image/", $base64Image[0]);
+                //dd($explodeImage);
+                $imageType = $explodeImage[1];
+
+                //dd($imageType);
+                $image_base64 = base64_decode($base64Image[1]);
+                //dd($image_base64);
+                $posts = Portfolio::get();
+                $file = $posts->last()->id .'.'. $imageType;
+                // $file = uniqid() .'.'. $imageType;
+                $file_dir = $folderPath . $file;
+                
+                file_put_contents($file_dir, $image_base64);
+                $portfolio_data->image = $file;
+
+        $update_data = $portfolio_data->update();
+
+        return $this->responseApi($update_data,'Data Updated','success',200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function destroy($id)
     {
-        //
+        $portfolio = Portfolio::find($id);
+        $destination = 'uploads/portfolio/'.$portfolio->image;
+           if(File::exists($destination))
+           {
+             File::delete($destination);
+           }
+        $portfolio->delete();
+        return response()->json("Deleted Successfully!");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Portfolio  $portfolio
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Portfolio $portfolio)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Portfolio  $portfolio
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Portfolio $portfolio)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Portfolio  $portfolio
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Portfolio $portfolio)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Portfolio  $portfolio
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Portfolio $portfolio)
-    {
-        //
-    }
+    
 }

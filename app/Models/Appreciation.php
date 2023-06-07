@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ClientLogo extends Model
+class Appreciation extends Model
 {
-    protected $table = "client_logos";
+    protected $table = "appreciations";
 
     protected $fillable = [
         'image'

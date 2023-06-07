@@ -23,7 +23,6 @@ class AuthController extends Controller
  * @OA\RequestBody(
 
  *    required=true,
-
  *    description="Provide All Info Below",
 
  *    @OA\JsonContent(
@@ -110,6 +109,7 @@ class AuthController extends Controller
                 ],
 
             ]);
+            
 
         } catch (BadResponseException $e) {
 
@@ -222,7 +222,8 @@ public function register(Request $request)
 
         if ($user->save()) {
             // Will call login method
-            return $this->login($request);
+             return $this->login($request);
+            //return response()->json(['status' => 'success', 'message' => 'Register Successfully']);
         }
     } catch (\Exception $e) {
         return response()->json(['status' => 'error', 'message' => $e->getMessage()]);

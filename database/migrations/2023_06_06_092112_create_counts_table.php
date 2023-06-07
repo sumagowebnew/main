@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientLogosTable extends Migration
+class CreateCountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateClientLogosTable extends Migration
      */
     public function up()
     {
-        Schema::create('client_logos', function (Blueprint $table) {
-            $table->id();
-            $table->string('image');
+        Schema::create('counts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('clients');
+            $table->bigInteger('projects');
+            $table->bigInteger('cup_of_coffee');
+            $table->bigInteger('awards');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateClientLogosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client_logos');
+        Schema::dropIfExists('counts');
     }
 }

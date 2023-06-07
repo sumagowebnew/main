@@ -97,5 +97,12 @@ class ContactEnquiriesController extends Controller
         return $this->responseApi($all_data,'All data get','success',200);
     }
 
+    public function destroy($id)
+    {
+        $Contact_enquiries = ContactEnquiries::find($id);
+        $Contact_enquiries->delete();
+        return response()->json("Contact Enquiry Deleted Successfully!");
+    }
+
 
 }

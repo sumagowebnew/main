@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGetAQuotesTable extends Migration
+class CreateAppreciationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateGetAQuotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('get_a_quotes', function (Blueprint $table) {
-            $table->id();
+        Schema::create('appreciations', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('image');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreateGetAQuotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('get_a_quotes');
+        Schema::dropIfExists('appreciations');
     }
 }
