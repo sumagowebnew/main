@@ -23,7 +23,7 @@ $router->post('/login', 'AuthController@login');
 
 $router->post('/refresh_token', 'AuthController@refresh_token');
 
-$router->get('/clientLogo', 'ClientLogoController@index');
+$router->get('/clientLogo/get-all-record', 'ClientLogoController@index');
 $router->get('/clientLogo/show/{id}', 'ClientLogoController@show');
 $router->post('/clientLogo/add', 'ClientLogoController@store');
 $router->post('/clientLogo/update/{id}', 'ClientLogoController@update');
@@ -60,15 +60,59 @@ $router->post('/portfolio/add', 'PortfolioController@add');
 $router->post('/portfolio/update/{id}', 'PortfolioController@update');
 $router->delete('/portfolio/delete/{id}', 'PortfolioController@destroy');
 
-$router->get('/appreciation', 'ClientLogoController@index');
+$router->get('/appreciation/get-all-record', 'AppreciationController@index');
 $router->get('/appreciation/show/{id}', 'AppreciationController@show');
 $router->post('/appreciation/add', 'AppreciationController@store');
 $router->post('/appreciation/update/{id}', 'AppreciationController@update');
 $router->delete('/appreciation/delete/{id}', 'AppreciationController@destroy');
 
+$router->get('/birthday/get-all-record', 'BirthdayController@index');
+$router->get('/birthday/show/{id}', 'BirthdayController@show');
+$router->post('/birthday/add', 'BirthdayController@store');
+$router->post('/birthday/update/{id}', 'BirthdayController@update');
+$router->delete('/birthday/delete/{id}', 'BirthdayController@destroy');
+
+$router->get('/events/get-all-record', 'EventsController@index');
+$router->get('/events/show/{id}', 'EventsController@show');
+$router->post('/events/add', 'EventsController@store');
+$router->post('/events/update/{id}', 'EventsController@update');
+$router->delete('/events/delete/{id}', 'EventsController@destroy');
+
+$router->get('/award/get-all-record', 'AwardController@index');
+$router->get('/award/show/{id}', 'AwardController@show');
+$router->post('/award/add', 'AwardController@store');
+$router->post('/award/update/{id}', 'AwardController@update');
+$router->delete('/award/delete/{id}', 'AwardController@destroy');
+
+$router->get('/training/get-all-record', 'TrainingController@index');
+$router->get('/training/show/{id}', 'TrainingController@show');
+$router->post('/training/add', 'TrainingController@store');
+$router->post('/training/update/{id}', 'TrainingController@update');
+$router->delete('/training/delete/{id}', 'TrainingController@destroy');
+
+$router->get('/designation/get-all-record', 'DesignationController@getAllRecord');
+$router->post('/designation/add', 'DesignationController@add');
+$router->post('/designation/update/{id}', 'DesignationController@update');
+$router->delete('/designation/delete/{id}', 'DesignationController@destroy');
+
+$router->get('/news/get-all-record', 'NewsController@index');
+$router->post('/news/add', 'NewsController@add');
+$router->delete('/news/delete/{id}', 'NewsController@destroy');
+
+$router->get('/certificate/get-all-record', 'CertificateController@index');
+$router->post('/certificate/add', 'CertificateController@add');
+$router->delete('/certificate/delete/{id}', 'CertificateController@destroy');
+
+$router->get('/mou/get-all-record', 'MouController@index');
+$router->post('/mou/add', 'MouController@add');
+$router->delete('/mou/delete/{id}', 'MouController@destroy');
+
+$router->get('/achievement/get-all-record', 'AchievementsController@index');
+$router->post('/achievement/add', 'AchievementsController@add');
+$router->delete('/achievement/delete/{id}', 'AchievementsController@destroy');
+
 $router->group(['middleware' => 'auth'], function () use ($router) {
 
 $router->post('/logout', 'AuthController@logout');
-
 
 });

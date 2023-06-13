@@ -5,23 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
-use App\Models\Birthday;
+use App\Models\Event;
 
-class BirthdayController extends Controller
+class EventsController extends Controller
 {
     public function index()
     {
         // Get all data from the database
-        $birthday = Birthday::get();
+        $event = Event::get();
 
         $response = [];
 
-        foreach ($birthday as $item) {
+        foreach ($event as $item) {
             $data = $item->toArray();
 
             $logo = $data['image'];
 
-            $imagePath = "uploads/birthday/" . $logo;
+            $imagePath = "uploads/event/" . $logo;
 
             $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
 
@@ -36,14 +36,14 @@ class BirthdayController extends Controller
     public function store(Request $request)
 {
     try {
-        $birthday = new birthday();
+        $event = new Event();
         
         // Check if there are any existing records
-        $existingRecord = Birthday::first();
+        $existingRecord = Event::first();
         $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
         $img_path = $request->image_file;
-        $folderPath = "uploads/birthday/";
+        $folderPath = "uploads/event/";
         
         $base64Image = explode(";base64,", $img_path);
         $explodeImage = explode("image/", $base64Image[0]);
@@ -54,9 +54,9 @@ class BirthdayController extends Controller
         $file_dir = $folderPath . $file;
 
         file_put_contents($file_dir, $image_base64);
-        $birthday->image = $file;
+        $event->image = $file;
         
-        $birthday->save();
+        $event->save();
 
         return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully']);
     } 
@@ -69,30 +69,30 @@ class BirthdayController extends Controller
     
     public function show($id)
     {
-        $birthday = birthday::find($id);
-        $logo = $birthday->image;
+        $event = Event::find($id);
+        $logo = $event->image;
 
-        $imagepath="uploads/birthday/". $logo;
+        $imagepath="uploads/event/". $logo;
 
         $base64 = "data:image/png;base64,".base64_encode(file_get_contents($imagepath));
 
         return response()->json($base64);
         
-        // $all_data = birthday::get()->toArray();
+        // $all_data = event::get()->toArray();
         // return $this->responseApi($all_data,'All data get','success',200);
     }
 
 
     public function destroy($id)
     {
-        $birthday = birthday::find($id);
-        $destination = 'uploads/birthday/'.$birthday->image;
+        $event = event::find($id);
+        $destination = 'uploads/event/'.$event->image;
            if(File::exists($destination))
            {
              File::delete($destination);
            }
-        $birthday->delete();
+        $event->delete();
         return response()->json("Deleted Successfully!");
     }
-
+   
 }
