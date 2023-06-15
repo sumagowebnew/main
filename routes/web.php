@@ -111,6 +111,24 @@ $router->get('/achievement/get-all-record', 'AchievementsController@index');
 $router->post('/achievement/add', 'AchievementsController@add');
 $router->delete('/achievement/delete/{id}', 'AchievementsController@destroy');
 
+$router->get('/developement_team/get-all-record', 'DevelopementTeamController@index');
+$router->post('/developement_team/add', 'DevelopementTeamController@add');
+$router->delete('/developement_team/delete/{id}', 'DevelopementTeamController@destroy');
+
+$router->get('/admin_team/get-all-record', 'AdminTeamController@index');
+$router->post('/admin_team/add', 'AdminTeamController@add');
+$router->delete('/admin_team/delete/{id}', 'AdminTeamController@destroy');
+
+$router->get('/trainee_team/get-all-record', 'TraineeTeamController@index');
+$router->post('/trainee_team/add', 'TraineeTeamController@add');
+$router->delete('/trainee_team/delete/{id}', 'TraineeTeamController@destroy');
+
+$router->get('/career_enquirires/get-all-record', 'CareerEnquiriesController@show');
+$router->get('/career_enquirires/{id}/download/cv', 'CareerEnquiriesController@downloadCV');
+$router->get('/career_enquirires/{id}/download/cover_letter', 'CareerEnquiriesController@downloadCoverLetter');
+$router->post('/career_enquirires/add', 'CareerEnquiriesController@add');
+$router->delete('/career_enquirires/delete/{id}', 'CareerEnquiriesController@destroy');
+
 $router->group(['middleware' => 'auth'], function () use ($router) {
 
 $router->post('/logout', 'AuthController@logout');

@@ -14,7 +14,15 @@ class CreateCareerEnquiriesTable extends Migration
     public function up()
     {
         Schema::create('career_enquiries', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('mobile_no');
+            $table->string('email');
+            $table->string('technology_choice');
+            $table->string('position');
+            $table->string('cv');
+            $table->string('duration');
+            $table->string('cover_letter');
             $table->timestamps();
         });
     }
