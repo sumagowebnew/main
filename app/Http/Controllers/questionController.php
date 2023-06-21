@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Questions;
 
-class questionController extends Controller
+class QuestionController extends Controller
 {
     public function add(Request $request)
     {
@@ -27,9 +27,11 @@ class questionController extends Controller
 
     public function destroy($id)
     {
+        $all_data=[];
         $Contact_enquiries = Questions::find($id);
         $Contact_enquiries->delete();
-        return response()->json("Question Deleted Successfully!");
+        return $this->responseApi($all_data,'Question Deleted Successfully!','success',200);
+        // return response()->json("Question Deleted Successfully!");
     }
 
 }

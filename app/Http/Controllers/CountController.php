@@ -41,8 +41,11 @@ class CountController extends Controller
 
     public function destroy($id)
     {
+        $all_data=[];
         $Contact_enquiries = Count::find($id);
         $Contact_enquiries->delete();
-        return response()->json("Deleted Successfully!");
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Question Deleted Successfully!','success',200);
+
     }
 }

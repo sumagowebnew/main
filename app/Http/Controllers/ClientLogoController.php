@@ -78,13 +78,8 @@ class ClientLogoController extends Controller
     public function store(Request $request)
     {
         //POST Data to database from user
-
-       
         $client_logo = new ClientLogo();
-
         try{
-
-           
             // $file = $request->file('image');
             // $extension = $file->getClientOriginalName();
             // dd($extension);s
@@ -100,16 +95,30 @@ class ClientLogoController extends Controller
                 $folderPath = "uploads/client_logo/";
                 
                 $base64Image = explode(";base64,", $img_path);
-                //dd($base64Image);
+                // dd($base64Image);
                 $explodeImage = explode("image/", $base64Image[0]);
-                //dd($explodeImage);
                 $imageType = $explodeImage[1];
 
                 //dd($imageType);
                 $image_base64 = base64_decode($base64Image[1]);
                 //dd($image_base64);
                 $posts = ClientLogo::get();
-                $file = $posts->last()->id .'.'. $imageType;
+                
+                if($posts->isNotEmpty())
+                {
+                    $file = $posts->last()->id .'.'. $imageType;
+                }else{
+                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $randomString = '';
+                
+                    for ($i = 0; $i < 5; $i++) {
+                        $index = rand(0, strlen($characters) - 1);
+                        $randomString .= $characters[$index];
+                    }
+       
+                    $file = $randomString .'.'. $imageType;
+                }
+                
                 $file_dir = $folderPath . $file;
                 
                 file_put_contents($file_dir, $image_base64);
@@ -205,6 +214,7 @@ class ClientLogoController extends Controller
      */
     public function destroy($id)
     {
+        $all_data=[];
         $clientlogo = ClientLogo::find($id);
         $destination = 'uploads/client_logo/'.$clientlogo->image;
            if(File::exists($destination))
@@ -212,6 +222,7 @@ class ClientLogoController extends Controller
              File::delete($destination);
            }
         $clientlogo->delete();
-        return response()->json("Logo Deleted Successfully!");
+        return $this->responseApi($all_data,'Logo Deleted Successfully!','success',200);
+        // return response()->json("Logo Deleted Successfully!");
     }
 }
