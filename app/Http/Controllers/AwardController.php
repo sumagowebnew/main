@@ -58,7 +58,7 @@ class AwardController extends Controller
         
         $award->save();
 
-        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully']);
+        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode'=>'200']);
     } 
     catch (Exception $e) {
         return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
@@ -85,6 +85,7 @@ class AwardController extends Controller
 
     public function destroy($id)
     {
+        $all_data=[];
         $award = Award::find($id);
         $destination = 'uploads/award/'.$award->image;
            if(File::exists($destination))
@@ -92,6 +93,7 @@ class AwardController extends Controller
              File::delete($destination);
            }
         $award->delete();
-        return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Award Deleted Successfully!','success',200);
+        // return response()->json("Deleted Successfully!");
     }
 }

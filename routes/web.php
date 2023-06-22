@@ -56,7 +56,7 @@ $router->post('/count/update/{id}', 'CountController@update');
 $router->get('/get-all-record', 'CountController@getAllRecord');
 $router->delete('/count/delete/{id}', 'CountController@destroy');
 
-$router->get('/portfolio/get-all-record', 'PortfolioController@getAllRecord');
+$router->get('/portfolio/get-all-record', 'PortfolioController@index');
 $router->post('/portfolio/add', 'PortfolioController@add');
 $router->post('/portfolio/update/{id}', 'PortfolioController@update');
 $router->delete('/portfolio/delete/{id}', 'PortfolioController@destroy');

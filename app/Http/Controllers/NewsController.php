@@ -84,7 +84,7 @@ class NewsController extends Controller
             $news->save();
 
             //return response()->json($client_logo);
-            return response()->json(['status' => 'Success', 'message' => 'news added successfully']);
+            return response()->json(['status' => 'Success', 'message' => 'news added successfully','statusCode'=>'200']);
 
             
         }
@@ -97,6 +97,7 @@ class NewsController extends Controller
     
     public function destroy($id)
     {
+        $all_data=[];
         $news = News::find($id);
         $destination = 'uploads/news/'.$news->news_image;
            if(File::exists($destination))
@@ -109,7 +110,8 @@ class NewsController extends Controller
              File::delete($destination1);
            }   
         $news->delete();
-        return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'News Deleted Successfully!','success',200);
+        // return response()->json("Deleted Successfully!");
     }
 
 }

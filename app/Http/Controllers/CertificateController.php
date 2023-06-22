@@ -82,7 +82,7 @@ class CertificateController extends Controller
             $certificate->save();
 
             //return response()->json($client_logo);
-            return response()->json(['status' => 'Success', 'message' => 'certificate added successfully']);
+            return response()->json(['status' => 'Success', 'message' => 'certificate added successfully','statusCode'=>'200']);
 
             
         }
@@ -95,6 +95,7 @@ class CertificateController extends Controller
     
     public function destroy($id)
     {
+        $all_data=[];
         $certificate = Certificate::find($id);
         $destination = 'uploads/certificate/'.$certificate->certificate_image;
            if(File::exists($destination))
@@ -107,7 +108,8 @@ class CertificateController extends Controller
              File::delete($destination1);
            }   
         $certificate->delete();
-        return response()->json("Deleted Successfully!");
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Certificate Deleted Successfully!','success',200);
     }
 
 }

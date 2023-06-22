@@ -57,7 +57,7 @@ class AppreciationController extends Controller
         
         $appreciation->save();
 
-        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully']);
+        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode'=>'200']);
     } 
     catch (Exception $e) {
         return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
@@ -84,6 +84,7 @@ class AppreciationController extends Controller
 
     public function destroy($id)
     {
+        $all_data=[];
         $appreciation = Appreciation::find($id);
         $destination = 'uploads/appreciation/'.$appreciation->image;
            if(File::exists($destination))
@@ -91,6 +92,7 @@ class AppreciationController extends Controller
              File::delete($destination);
            }
         $appreciation->delete();
-        return response()->json("Deleted Successfully!");
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Appreciation Details Deleted Successfully!','success',200);
     }
 }

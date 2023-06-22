@@ -58,7 +58,7 @@ class TrainingController extends Controller
         
         $training->save();
 
-        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully']);
+        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode'=>'200']);
     } 
     catch (Exception $e) {
         return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
@@ -85,6 +85,7 @@ class TrainingController extends Controller
 
     public function destroy($id)
     {
+        $all_data=[];
         $training = Training::find($id);
         $destination = 'uploads/training/'.$training->image;
            if(File::exists($destination))
@@ -92,6 +93,7 @@ class TrainingController extends Controller
              File::delete($destination);
            }
         $training->delete();
-        return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Training Deleted Successfully!','success',200);
+        // return response()->json("Deleted Successfully!");
     }
 }

@@ -58,10 +58,10 @@ class BirthdayController extends Controller
         
         $birthday->save();
 
-        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully']);
+        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode' => '200']);
     } 
     catch (Exception $e) {
-        return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        return response()->json(['status' => 'error', 'message' => $e->getMessage(),'statusCode' => '201']);
     }
 
     }
@@ -85,6 +85,7 @@ class BirthdayController extends Controller
 
     public function destroy($id)
     {
+        $all_data=[];
         $birthday = birthday::find($id);
         $destination = 'uploads/birthday/'.$birthday->image;
            if(File::exists($destination))
@@ -92,7 +93,8 @@ class BirthdayController extends Controller
              File::delete($destination);
            }
         $birthday->delete();
-        return response()->json("Deleted Successfully!");
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Birthday Deleted Successfully!','success',200);
     }
 
 }

@@ -89,7 +89,8 @@ class ClientLogoController extends Controller
 
             //$image = "data:image/png;base64,".base64_encode(file_get_contents($file));
             //dd($image);
-
+            $existingRecord = ClientLogo::first();
+            $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
             $img_path = $request->image_file;
 
                 $folderPath = "uploads/client_logo/";
@@ -104,20 +105,7 @@ class ClientLogoController extends Controller
                 //dd($image_base64);
                 $posts = ClientLogo::get();
                 
-                if($posts->isNotEmpty())
-                {
-                    $file = $posts->last()->id .'.'. $imageType;
-                }else{
-                    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                    $randomString = '';
-                
-                    for ($i = 0; $i < 5; $i++) {
-                        $index = rand(0, strlen($characters) - 1);
-                        $randomString .= $characters[$index];
-                    }
-       
-                    $file = $randomString .'.'. $imageType;
-                }
+                    $file = $recordId .'.'. $imageType;
                 
                 $file_dir = $folderPath . $file;
                 
@@ -127,7 +115,7 @@ class ClientLogoController extends Controller
             $client_logo->save();
 
             //return response()->json($client_logo);
-            return response()->json(['status' => 'Success', 'message' => 'Logo uploaded successfully']);
+            return response()->json(['status' => 'Success', 'message' => 'Logo uploaded successfully','statusCode'=>'200']);
 
             
         }

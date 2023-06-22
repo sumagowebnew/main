@@ -36,9 +36,11 @@ class DesignationController extends Controller
 
     public function destroy($id)
     {
+        $all_data=[];
         $Designation = Designation::find($id);
         $Designation->delete();
-        return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Designation Deleted Successfully!','success',200);
+        // return response()->json("Deleted Successfully!");
     }
 }
  

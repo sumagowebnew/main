@@ -58,10 +58,10 @@ class EventsController extends Controller
         
         $event->save();
 
-        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully']);
+        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode'=>'200']);
     } 
     catch (Exception $e) {
-        return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        return response()->json(['status' => 'error', 'message' => $e->getMessage(),'statusCode'=>'201']);
     }
 
     }
@@ -85,6 +85,7 @@ class EventsController extends Controller
 
     public function destroy($id)
     {
+        $all_data=[];
         $event = event::find($id);
         $destination = 'uploads/event/'.$event->image;
            if(File::exists($destination))
@@ -92,7 +93,9 @@ class EventsController extends Controller
              File::delete($destination);
            }
         $event->delete();
-        return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Event Deleted Successfully!','success',200);
+
+        // return response()->json("Deleted Successfully!");
     }
    
 }

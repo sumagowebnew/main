@@ -10,6 +10,46 @@ use Illuminate\Support\Facades\File;
 
 class PortfolioController extends Controller
 {
+
+    public function index()
+    {
+        // Get all data from the database
+        $Portfolio = Portfolio::get();
+
+        $response = [];
+
+        foreach ($Portfolio as $portfolio) {
+            $data = $portfolio->toArray();
+
+            $logo = $data['image'];
+
+            $imagePath = "uploads/portfolio/" . $logo;
+
+            $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
+
+            // $data['image'] = $base64;
+           
+            $response['title']= $data['title'];
+            $response['description']=$data['description'];
+            $response['website_link']=$data['website_link'];
+            $response['website_status']=$data['website_status'];
+            $response['created_at']=$data['created_at'];
+            $response['updated_at']=$data['updated_at'];
+            $response['image'] = $base64;
+            
+        }
+
+        return response()->json($response);
+    }
+
+
+    public function getAllRecord(Request $request)
+    {
+        $all_data = Count::get()->toArray();
+        return $this->responseApi($all_data,'All data get','success',200);
+    }
+
+
     public function add(Request $request)
     {
 
@@ -19,7 +59,8 @@ class PortfolioController extends Controller
      $portfolio->website_link = $request->website_link;
 
         try{
-
+            $existingRecord = Portfolio::first();
+            $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
             $img_path = $request->image_file;
 
                 $folderPath = "uploads/portfolio/";
@@ -34,7 +75,10 @@ class PortfolioController extends Controller
                 $image_base64 = base64_decode($base64Image[1]);
                 //dd($image_base64);
                 $posts = Portfolio::get();
-                $file = $posts->last()->id .'.'. $imageType;
+                
+       
+                    $file = $recordId .'.'. $imageType;
+                
                 // $file = uniqid() .'.'. $imageType;
                 $file_dir = $folderPath . $file;
                 
@@ -44,7 +88,7 @@ class PortfolioController extends Controller
             $portfolio->save();
 
             //return response()->json($client_logo);
-            return response()->json(['status' => 'Success', 'message' => 'Portfolio added successfully']);
+            return response()->json(['status' => 'Success', 'message' => 'Portfolio added successfully','Statuscode'=>'200']);
 
             
         }
@@ -75,7 +119,7 @@ class PortfolioController extends Controller
                 $image_base64 = base64_decode($base64Image[1]);
                 //dd($image_base64);
                 $posts = Portfolio::get();
-                $file = $posts->last()->id .'.'. $imageType;
+                $file = $id .'_updated.'. $imageType;
                 // $file = uniqid() .'.'. $imageType;
                 $file_dir = $folderPath . $file;
                 
@@ -89,6 +133,7 @@ class PortfolioController extends Controller
 
     public function destroy($id)
     {
+        $all_data=[];
         $portfolio = Portfolio::find($id);
         $destination = 'uploads/portfolio/'.$portfolio->image;
            if(File::exists($destination))
@@ -96,7 +141,9 @@ class PortfolioController extends Controller
              File::delete($destination);
            }
         $portfolio->delete();
-        return response()->json("Deleted Successfully!");
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Portfolio Deleted Successfully!','success',200);
+
     }
 
     
