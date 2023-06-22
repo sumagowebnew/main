@@ -10,11 +10,14 @@ class DesignationController extends Controller
 {
     public function add(Request $request)
     {
-        $data = [
-            'designation' => $request->designation,
-        ];
-        $insert_data = Designation::insert($data);
-        return $this->responseApi($insert_data,'All data get added','success',200);
+        $designation = new Designation();
+        // $data = [
+        //     'designation' => $request->designation,
+        // ];
+        $designation->designation = $request->designation;
+        $designation->save();
+        // $insert_data = Designation::insert($data);
+        return $this->responseApi([],'All data get added','success',200);
     }
 
     public function getAllRecord(Request $request)

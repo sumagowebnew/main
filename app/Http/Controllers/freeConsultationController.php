@@ -11,14 +11,15 @@ class freeConsultationController extends Controller
 {
     public function add(Request $request)
     {
-        $data = [
-            'name'      => $request->name,
-            'mobile_no' => $request->mobile_no,
-            'email'     => $request->email,
-            'topic'     => $request->topic,
-        ];
-        $insert_data = FreeConsultations::insert($data);
-        return $this->responseApi($insert_data,'All data get added','success',200);
+        $freeConsultations = new FreeConsultations();
+        $freeConsultations->name = $request->name;
+        $freeConsultations->mobile_no = $request->mobile_no;
+        $freeConsultations->email = $request->email;
+        $freeConsultations->topic = $request->topic;
+        $freeConsultations->save();
+        // $insert_data = FreeConsultations::insert($data);
+        
+        return $this->responseApi([],'All data get added','success',200);
     }
 
     public function getAllRecord(Request $request)

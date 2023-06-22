@@ -10,13 +10,18 @@ class QuestionController extends Controller
 {
     public function add(Request $request)
     {
-        $data = [
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'question' => $request->question,
-        ];
-        $insert_data = Questions::insert($data);
-        return $this->responseApi($insert_data,'All data get added','success',200);
+        $questions = new Questions();
+        // $data = [
+        //     'name'     => $request->name,
+        //     'email'    => $request->email,
+        //     'question' => $request->question,
+        // ];
+        // $insert_data = Questions::insert($data);
+        $questions->name = $request->name;
+        $questions->email = $request->email;
+        $questions->question = $request->question;
+        $questions->save();
+        return $this->responseApi([],'All data get added','success',200);
     }
 
     public function getAllRecord(Request $request)

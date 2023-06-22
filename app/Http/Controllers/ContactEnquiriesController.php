@@ -81,14 +81,20 @@ class ContactEnquiriesController extends Controller
  */
     public function getAdd(Request $request)
     {
-        $data = [
-            'name'      => $request->name,
-            'mobile_no' => $request->mobile_no,
-            'email'     => $request->email,
-            'messege'   => $request->messege,
-        ];
-        $insert_data = ContactEnquiries::insert($data);
-        return $this->responseApi($insert_data,'All data get added','success',200);
+        $contactEnquiries = new ContactEnquiries();
+        // $data = [
+        //     'name'      => $request->name,
+        //     'mobile_no' => $request->mobile_no,
+        //     'email'     => $request->email,
+        //     'messege'   => $request->messege,
+        // ];
+        $contactEnquiries->name = $request->name;
+        $contactEnquiries->mobile_no = $request->mobile_no;
+        $contactEnquiries->email = $request->email;
+        $contactEnquiries->messege = $request->messege;
+        $contactEnquiries->save();
+        // $insert_data = ContactEnquiries::insert($data);
+        return $this->responseApi([],'All data get added','success',200);
     }
 
     public function getAllRecord(Request $request)

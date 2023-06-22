@@ -10,16 +10,16 @@ class GetAQuoteController extends Controller
 {
     public function add(Request $request)
     {
-        $data = [
-            'name'     => $request->name,
-            'mobile_no'=> $request->mobile_no,
-            'email'    => $request->email,
-            'service'  => $request->service,
-            'address'  => $request->address,
-            'comment'  => $request->comment,
-        ];
-        $insert_data = GetAQuote::insert($data);
-        return $this->responseApi($insert_data,'All data get added','success',200);
+       
+        $getAQuote = new GetAQuote();
+        $getAQuote->name = $request->name;
+        $getAQuote->mobile_no = $request->mobile_no;
+        $getAQuote->email = $request->email;
+        $getAQuote->service = $request->service;
+        $getAQuote->address = $request->address;
+        $getAQuote->comment = $request->comment;
+        $getAQuote->save();
+        return $this->responseApi([],'All data get added','success',200);
     }
 
     public function getAllRecord(Request $request)

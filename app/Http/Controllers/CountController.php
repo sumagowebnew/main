@@ -10,14 +10,13 @@ class CountController extends Controller
 {
     public function add(Request $request)
     {
-        $data = [
-            'clients' => $request->clients,
-            'projects' => $request->projects,
-            'cup_of_coffee' => $request->cup_of_coffee,
-            'awards' => $request->awards,
-        ];
-        $insert_data = Count::insert($data);
-        return $this->responseApi($insert_data,'All data get added','success',200);
+        $count = new Count();
+        $count->clients = $request->clients;
+        $count->projects = $request->projects;
+        $count->cup_of_coffee = $request->cup_of_coffee;
+        $count->awards = $request->awards;
+        $count->save();
+        return $this->responseApi([],'All data get added','success',200);
     }
 
     public function getAllRecord(Request $request)
