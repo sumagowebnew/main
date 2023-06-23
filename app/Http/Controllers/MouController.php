@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MOU;
+use App\Models\Mou;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -13,7 +13,6 @@ class MouController extends Controller
     {
         // Get all data from the database
         $mou = MOU::get();
-        dd($mou);
 
         $response = [];
 
@@ -83,7 +82,7 @@ class MouController extends Controller
             $mou->save();
 
             //return response()->json($client_logo);
-            return response()->json(['status' => 'Success', 'message' => 'mou added successfully']);
+            return response()->json(['status' => 'Success', 'message' => 'mou added successfully','statusCode'=>'200']);
 
             
         }
@@ -96,6 +95,7 @@ class MouController extends Controller
     
     public function destroy($id)
     {
+        $all_data=[];
         $mou = MOU::find($id);
         $destination = 'uploads/mou/'.$mou->mou_image;
            if(File::exists($destination))
@@ -108,7 +108,8 @@ class MouController extends Controller
              File::delete($destination1);
            }   
         $mou->delete();
-        return response()->json("Deleted Successfully!");
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Logo Deleted Successfully!','success',200);
     }
 
 }

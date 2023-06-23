@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\File;
 
 class AchievementsController extends Controller
 {
-    public function add(Request $request)
+public function add(Request $request)
 {
     // Get the title name from the request
     $titleName = $request->input('title');
