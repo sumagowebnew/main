@@ -13,6 +13,7 @@ class MouController extends Controller
     {
         // Get all data from the database
         $mou = MOU::get();
+        dd($mou);
 
         $response = [];
 

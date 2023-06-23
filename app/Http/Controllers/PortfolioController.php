@@ -10,33 +10,31 @@ use Illuminate\Support\Facades\File;
 
 class PortfolioController extends Controller
 {
-
     public function index()
     {
         // Get all data from the database
-        $Portfolio = Portfolio::get();
+        $portfolio = Portfolio::get();
 
         $response = [];
 
-        foreach ($Portfolio as $portfolio) {
-            $data = $portfolio->toArray();
-
+        foreach ($portfolio as $item) {
+            $data = $item->toArray();
+          
             $logo = $data['image'];
 
             $imagePath = "uploads/portfolio/" . $logo;
 
             $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
 
-            // $data['image'] = $base64;
-           
-            $response['title']= $data['title'];
-            $response['description']=$data['description'];
-            $response['website_link']=$data['website_link'];
-            $response['website_status']=$data['website_status'];
-            $response['created_at']=$data['created_at'];
-            $response['updated_at']=$data['updated_at'];
-            $response['image'] = $base64;
-            
+            $data['image'] = $base64;
+            // $data['title']= $data['title'];
+            // $data['description']=$data['description'];
+            // $data['website_link']=$data['website_link'];
+            // $data['website_status']=$data['website_status'];
+            // $data['created_at']=$data['created_at'];
+            // $data['updated_at']=$data['updated_at'];
+          
+            $response[] = $data;
         }
 
         return response()->json($response);
