@@ -14,7 +14,7 @@ class CreateAchievementsTable extends Migration
     public function up()
     {
         Schema::create('achievements', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->unsignedbigInteger ('id');
             $table->string('title');
             $table->timestamps();
         });

@@ -63,6 +63,21 @@ class DevelopementTeamController extends Controller
 
         $teamDetail->save();
 
-        return response()->json(['status' => 'Success', 'message' => 'Added successfully']);
+        return response()->json(['status' => 'Success', 'message' => 'Added successfully','statusCode'=>'200']);
     }
+
+    public function destroy($id)
+    {
+        $all_data=[];
+        $developement_team = DevelopementTeam::find($id);
+        $destination = 'uploads/developement_team/'.$developement_team->developement_team_image;
+           if(File::exists($destination))
+           {
+             File::delete($destination);
+           }
+        $developement_team->delete();
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Team Details Deleted Successfully!','success',200);
+    }
+
 }
