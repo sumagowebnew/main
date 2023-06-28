@@ -63,6 +63,19 @@ class TraineeTeamController extends Controller
 
         $teamDetail->save();
 
-        return response()->json(['status' => 'Success', 'message' => 'Added successfully']);
+        return response()->json(['status' => 'Success', 'message' => 'Added successfully','StatusCode'=>'200']);
+    }
+    public function destroy($id)
+    {
+        $all_data=[];
+        $traineeteam = TraineeTeam::find($id);
+        $destination = 'uploads/trainee_team/'.$traineeteam->photo;
+           if(File::exists($destination))
+           {
+             File::delete($destination);
+           }
+        $traineeteam->delete();
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Team Details Deleted Successfully!','success',200);
     }
 }

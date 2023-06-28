@@ -22,7 +22,6 @@ class CreateAdminTeamsTable extends Migration
             $table->string('experience');
             $table->tinyInteger('status')->default('1')->comment('1=Active,0=inactive');
             $table->timestamps();
-
             $table->foreign('designation_id')->references('id')->on('designations');
         });
     }

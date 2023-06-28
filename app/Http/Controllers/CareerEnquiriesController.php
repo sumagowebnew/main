@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Models\CareerEnquiries;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 
 class CareerEnquiriesController extends Controller
 {
@@ -25,6 +26,7 @@ class CareerEnquiriesController extends Controller
     
             // Append the processed applicant data
             $processedApplicants[] = [
+                'id' => $applicant->id,
                 'name' => $applicant->name,
                 'email' => $applicant->email,
                 'mobile_no' => $applicant->mobile_no,
@@ -134,8 +136,27 @@ class CareerEnquiriesController extends Controller
         $applicant->save();
 
         // Return a response indicating success
-        return response()->json(['message' => 'Enquiry sent successfully'], 201);
+        return response()->json(['status' => 'Success', 'message' => 'Added successfully','StatusCode'=>'200']);
 
+    }
+
+    public function destroy($id)
+    {
+        $all_data=[];
+        $careerEnquiries = CareerEnquiries::find($id);
+        $destination = 'uploads/cv_files/'.$careerEnquiries->cv;
+        $cover_letter_files = 'uploads/cover_letter_files/'.$careerEnquiries->cover_letter;
+           if(File::exists($destination))
+           {
+             File::delete($destination);
+           }
+           if(File::exists($cover_letter_files))
+           {
+             File::delete($cover_letter_files);
+           }
+        $careerEnquiries->delete();
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Team Details Deleted Successfully!','success',200);
     }
 
 }
