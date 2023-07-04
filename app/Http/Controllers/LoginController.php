@@ -10,7 +10,7 @@ class LoginController extends Controller
     //Login function
     public function user_login(Request $request)
     {
-        $client = new Client();
+        $client = new User();
         try
         {
             return $client->post(config('service.passport.login_endpoint'), [

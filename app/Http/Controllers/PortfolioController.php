@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
-
+use Validator;
 class PortfolioController extends Controller
 {
     public function index()
@@ -50,83 +50,110 @@ class PortfolioController extends Controller
 
     public function add(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title'=>'required',
+            'description' => 'required',
+            'image_file'=>'required',
+            'website_link'=>'required',
+            ]);
+        
+            if ($validator->fails())
+            {
+                return $validator->errors()->all();
+        
+            }else
+            {
+                $portfolio = new Portfolio();
+                $portfolio->title = $request->title;
+                $portfolio->description = $request->description;
+                $portfolio->website_link = $request->website_link;
 
-     $portfolio = new Portfolio();
-     $portfolio->title = $request->title;
-     $portfolio->description = $request->description;
-     $portfolio->website_link = $request->website_link;
+                    try{
+                        $existingRecord = Portfolio::first();
+                        $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
+                        $img_path = $request->image_file;
 
-        try{
-            $existingRecord = Portfolio::first();
-            $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
-            $img_path = $request->image_file;
+                            $folderPath = "uploads/portfolio/";
+                            
+                            $base64Image = explode(";base64,", $img_path);
+                            //dd($base64Image);
+                            $explodeImage = explode("image/", $base64Image[0]);
+                            //dd($explodeImage);
+                            $imageType = $explodeImage[1];
 
-                $folderPath = "uploads/portfolio/";
+                            //dd($imageType);
+                            $image_base64 = base64_decode($base64Image[1]);
+                            //dd($image_base64);
+                            $posts = Portfolio::get();
+                            
                 
-                $base64Image = explode(";base64,", $img_path);
-                //dd($base64Image);
-                $explodeImage = explode("image/", $base64Image[0]);
-                //dd($explodeImage);
-                $imageType = $explodeImage[1];
+                                $file = $recordId .'.'. $imageType;
+                            
+                            // $file = uniqid() .'.'. $imageType;
+                            $file_dir = $folderPath . $file;
+                            
+                            file_put_contents($file_dir, $image_base64);
+                            $portfolio->image = $file;
+                        
+                        $portfolio->save();
 
-                //dd($imageType);
-                $image_base64 = base64_decode($base64Image[1]);
-                //dd($image_base64);
-                $posts = Portfolio::get();
-                
-       
-                    $file = $recordId .'.'. $imageType;
-                
-                // $file = uniqid() .'.'. $imageType;
-                $file_dir = $folderPath . $file;
-                
-                file_put_contents($file_dir, $image_base64);
-                $portfolio->image = $file;
-            
-            $portfolio->save();
+                        //return response()->json($client_logo);
+                        return response()->json(['status' => 'Success', 'message' => 'Portfolio added successfully','Statuscode'=>'200']);
 
-            //return response()->json($client_logo);
-            return response()->json(['status' => 'Success', 'message' => 'Portfolio added successfully','Statuscode'=>'200']);
+                        
+                    }
 
-            
-        }
-
-        catch (exception $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
-        }
+                    catch (exception $e) {
+                        return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+                    }
+            }
     }    
 
     public function update(Request $request, $id)
     {
-        $portfolio_data = Portfolio::find($id);
-        $portfolio_data->title = $request->title;
-        $portfolio_data->description = $request->description;
-        $portfolio_data->website_link = $request->website_link;
+        $validator = Validator::make($request->all(), [
+            'title'=>'required',
+            'description' => 'required',
+            'image_file'=>'required',
+            'website_link'=>'required',
+            ]);
         
-        $img_path = $request->image_file;
-
-                $folderPath = "uploads/portfolio/";
+            if ($validator->fails())
+            {
+                return $validator->errors()->all();
+        
+            }else
+            {
+                $portfolio_data = Portfolio::find($id);
+                $portfolio_data->title = $request->title;
+                $portfolio_data->description = $request->description;
+                $portfolio_data->website_link = $request->website_link;
                 
-                $base64Image = explode(";base64,", $img_path);
-                //dd($base64Image);
-                $explodeImage = explode("image/", $base64Image[0]);
-                //dd($explodeImage);
-                $imageType = $explodeImage[1];
+                $img_path = $request->image_file;
 
-                //dd($imageType);
-                $image_base64 = base64_decode($base64Image[1]);
-                //dd($image_base64);
-                $posts = Portfolio::get();
-                $file = $id .'_updated.'. $imageType;
-                // $file = uniqid() .'.'. $imageType;
-                $file_dir = $folderPath . $file;
-                
-                file_put_contents($file_dir, $image_base64);
-                $portfolio_data->image = $file;
+                        $folderPath = "uploads/portfolio/";
+                        
+                        $base64Image = explode(";base64,", $img_path);
+                        //dd($base64Image);
+                        $explodeImage = explode("image/", $base64Image[0]);
+                        //dd($explodeImage);
+                        $imageType = $explodeImage[1];
 
-        $update_data = $portfolio_data->update();
+                        //dd($imageType);
+                        $image_base64 = base64_decode($base64Image[1]);
+                        //dd($image_base64);
+                        $posts = Portfolio::get();
+                        $file = $id .'_updated.'. $imageType;
+                        // $file = uniqid() .'.'. $imageType;
+                        $file_dir = $folderPath . $file;
+                        
+                        file_put_contents($file_dir, $image_base64);
+                        $portfolio_data->image = $file;
 
-        return $this->responseApi($update_data,'Data Updated','success',200);
+                $update_data = $portfolio_data->update();
+
+                return $this->responseApi($update_data,'Data Updated','success',200);
+            }
     }
 
     public function destroy($id)

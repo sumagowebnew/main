@@ -5,22 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\GetAQuote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Validator;
 class GetAQuoteController extends Controller
 {
     public function add(Request $request)
     {
-       
-        $getAQuote = new GetAQuote();
-        $getAQuote->name = $request->name;
-        $getAQuote->mobile_no = $request->mobile_no;
-        $getAQuote->email = $request->email;
-        $getAQuote->service = $request->service;
-        $getAQuote->address = $request->address;
-        $getAQuote->comment = $request->comment;
-        $getAQuote->save();
-        return $this->responseApi([],'All data get added','success',200);
-    }
+        $validator = Validator::make($request->all(), [
+            'name'=>'required',
+            'mobile_no' => 'required|numeric',
+            'email'=>'required|email',
+            'service'=>'required',
+            'address'=>'required',
+            'comment'=>'required',
+            ]);
+        
+            if ($validator->fails())
+            {
+                return $validator->errors()->all();
+        
+            }else{
+                $getAQuote = new GetAQuote();
+                $getAQuote->name = $request->name;
+                $getAQuote->mobile_no = $request->mobile_no;
+                $getAQuote->email = $request->email;
+                $getAQuote->service = $request->service;
+                $getAQuote->address = $request->address;
+                $getAQuote->comment = $request->comment;
+                $getAQuote->save();
+                return $this->responseApi([],'All data get added','success',200);
+            }
+            }
 
     public function getAllRecord(Request $request)
     {

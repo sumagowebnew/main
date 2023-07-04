@@ -8,7 +8,7 @@ use App\Models\CareerEnquiries;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
-
+use Validator;
 class CareerEnquiriesController extends Controller
 {
     public function show()
@@ -99,44 +99,61 @@ class CareerEnquiriesController extends Controller
 
     public function add(Request $request)
     {
-        $existingRecord = CareerEnquiries::first();
-        $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
+        $validator = Validator::make($request->all(), [
+            'cv'=>'required',
+            'cover_letter'=>'required',
+            'name'=>'required',
+            'email'=>'required|email',
+            'mobile_no' => 'required|numeric',
+            'technology_choice'=>'required',
+            'position' => 'required',
+            'duration'=>'required',
+            ]);
+        
+        if ($validator->fails())
+        {
+                return $validator->errors()->all();
+    
+        }else{
+            $existingRecord = CareerEnquiries::first();
+            $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
-        // Extract the CV and cover letter files from the base64 encoded data
-        $cvFileData = base64_decode($request->input('cv'));
-        $coverLetterFileData = base64_decode($request->input('cover_letter'));
+            // Extract the CV and cover letter files from the base64 encoded data
+            $cvFileData = base64_decode($request->input('cv'));
+            $coverLetterFileData = base64_decode($request->input('cover_letter'));
 
-        // Generate unique file names for the CV and cover letter files
-        $cvFileName = 'cv_' . $recordId . '.pdf';
-        $coverLetterFileName = 'cover_letter_' . $recordId . '.pdf';
+            // Generate unique file names for the CV and cover letter files
+            $cvFileName = 'cv_' . $recordId . '.pdf';
+            $coverLetterFileName = 'cover_letter_' . $recordId . '.pdf';
 
-         $folderPath = "uploads/cv_files/";
-        $folderPath1 = "uploads/cover_letter_files/";
-        // $file = $recordId . '.' .$imageType;
-        $file_dir = $folderPath . $cvFileName;
-        $file_dir1 = $folderPath1 . $coverLetterFileName;
+            $folderPath = "uploads/cv_files/";
+            $folderPath1 = "uploads/cover_letter_files/";
+            // $file = $recordId . '.' .$imageType;
+            $file_dir = $folderPath . $cvFileName;
+            $file_dir1 = $folderPath1 . $coverLetterFileName;
 
-        file_put_contents($file_dir, $cvFileData);
+            file_put_contents($file_dir, $cvFileData);
 
-        file_put_contents($file_dir1, $coverLetterFileData);
-        // Store the CV and cover letter files in the storage path
-        // Storage::put('uploads/cv_files/' . $cvFileName, $cvFileData);
-        // Storage::put('uploads/cover_letter_files/' . $coverLetterFileName, $coverLetterFileData);
+            file_put_contents($file_dir1, $coverLetterFileData);
+            // Store the CV and cover letter files in the storage path
+            // Storage::put('uploads/cv_files/' . $cvFileName, $cvFileData);
+            // Storage::put('uploads/cover_letter_files/' . $coverLetterFileName, $coverLetterFileData);
 
-        // Create a new applicant record
-        $applicant = new CareerEnquiries();
-        $applicant->name = $request->input('name');
-        $applicant->email = $request->input('email');
-        $applicant->mobile_no = $request->input('mobile_no');
-        $applicant->technology_choice = $request->input('technology_choice');
-        $applicant->position = $request->input('position');
-        $applicant->cv = $cvFileName;
-        $applicant->cover_letter = $coverLetterFileName;
-        $applicant->duration = $request->input('duration');
-        $applicant->save();
+            // Create a new applicant record
+            $applicant = new CareerEnquiries();
+            $applicant->name = $request->input('name');
+            $applicant->email = $request->input('email');
+            $applicant->mobile_no = $request->input('mobile_no');
+            $applicant->technology_choice = $request->input('technology_choice');
+            $applicant->position = $request->input('position');
+            $applicant->cv = $cvFileName;
+            $applicant->cover_letter = $coverLetterFileName;
+            $applicant->duration = $request->input('duration');
+            $applicant->save();
 
-        // Return a response indicating success
-        return response()->json(['status' => 'Success', 'message' => 'Added successfully','StatusCode'=>'200']);
+            // Return a response indicating success
+            return response()->json(['status' => 'Success', 'message' => 'Added successfully','StatusCode'=>'200']);
+        }
 
     }
 

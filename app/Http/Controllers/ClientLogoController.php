@@ -6,7 +6,7 @@ use App\Models\ClientLogo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
-
+use Validator;
 
 class ClientLogoController extends Controller
 {
@@ -77,6 +77,15 @@ class ClientLogoController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'image_file'=>'required',
+            ]);
+        
+        if ($validator->fails())
+        {
+                return $validator->errors()->all();
+    
+        }else{
         //POST Data to database from user
         $client_logo = new ClientLogo();
         try{
@@ -123,6 +132,7 @@ class ClientLogoController extends Controller
         catch (exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
+    }
     
     }
 

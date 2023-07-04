@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Models\Appreciation;
-
+use Validator;
 class AppreciationController extends Controller
 {
     public function index()
@@ -32,37 +32,46 @@ class AppreciationController extends Controller
         return response()->json($response);
     }
     
-    public function store(Request $request)
+public function store(Request $request)
 {
-    try {
-        $appreciation = new Appreciation();
-        
-        // Check if there are any existing records
-        $existingRecord = Appreciation::first();
-        $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
+    $validator = Validator::make($request->all(), [
+        'image_file'=>'required',
+        ]);
+    
+        if ($validator->fails())
+        {
+                return $validator->errors()->all();
+    
+        }else{
+                try {
+                    $appreciation = new Appreciation();
+                    
+                    // Check if there are any existing records
+                    $existingRecord = Appreciation::first();
+                    $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
-        $img_path = $request->image_file;
-        $folderPath = "uploads/appreciation/";
-        
-        $base64Image = explode(";base64,", $img_path);
-        $explodeImage = explode("image/", $base64Image[0]);
-        $imageType = $explodeImage[1];
-        $image_base64 = base64_decode($base64Image[1]);
+                    $img_path = $request->image_file;
+                    $folderPath = "uploads/appreciation/";
+                    
+                    $base64Image = explode(";base64,", $img_path);
+                    $explodeImage = explode("image/", $base64Image[0]);
+                    $imageType = $explodeImage[1];
+                    $image_base64 = base64_decode($base64Image[1]);
 
-        $file = $recordId . '.' . $imageType;
-        $file_dir = $folderPath . $file;
+                    $file = $recordId . '.' . $imageType;
+                    $file_dir = $folderPath . $file;
 
-        file_put_contents($file_dir, $image_base64);
-        $appreciation->image = $file;
-        
-        $appreciation->save();
+                    file_put_contents($file_dir, $image_base64);
+                    $appreciation->image = $file;
+                    
+                    $appreciation->save();
 
-        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode'=>'200']);
-    } 
-    catch (Exception $e) {
-        return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
-    }
-
+                    return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode'=>'200']);
+                } 
+                catch (Exception $e) {
+                    return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+                }
+        }
     }
 
     

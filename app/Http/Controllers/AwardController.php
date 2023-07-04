@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Models\Award;
-
+use Validator;
 class AwardController extends Controller
 {
     public function index()
@@ -33,37 +33,46 @@ class AwardController extends Controller
         return response()->json($response);
     }
     
-    public function store(Request $request)
+public function store(Request $request)
 {
-    try {
-        $award = new Award();
-        
-        // Check if there are any existing records
-        $existingRecord = Award::first();
-        $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
+    $validator = Validator::make($request->all(), [
+        'image_file'=>'required',
+        ]);
+    
+    if ($validator->fails())
+    {
+            return $validator->errors()->all();
 
-        $img_path = $request->image_file;
-        $folderPath = "uploads/award/";
-        
-        $base64Image = explode(";base64,", $img_path);
-        $explodeImage = explode("image/", $base64Image[0]);
-        $imageType = $explodeImage[1];
-        $image_base64 = base64_decode($base64Image[1]);
+    }else{
+        try {
+            $award = new Award();
+            
+            // Check if there are any existing records
+            $existingRecord = Award::first();
+            $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
-        $file = $recordId . '.' . $imageType;
-        $file_dir = $folderPath . $file;
+            $img_path = $request->image_file;
+            $folderPath = "uploads/award/";
+            
+            $base64Image = explode(";base64,", $img_path);
+            $explodeImage = explode("image/", $base64Image[0]);
+            $imageType = $explodeImage[1];
+            $image_base64 = base64_decode($base64Image[1]);
 
-        file_put_contents($file_dir, $image_base64);
-        $award->image = $file;
-        
-        $award->save();
+            $file = $recordId . '.' . $imageType;
+            $file_dir = $folderPath . $file;
 
-        return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode'=>'200']);
-    } 
-    catch (Exception $e) {
-        return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+            file_put_contents($file_dir, $image_base64);
+            $award->image = $file;
+            
+            $award->save();
+
+            return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode'=>'200']);
+        } 
+        catch (Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
-
     }
 
     

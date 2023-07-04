@@ -5,18 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Count;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Validator;
 class CountController extends Controller
 {
     public function add(Request $request)
     {
-        $count = new Count();
-        $count->clients = $request->clients;
-        $count->projects = $request->projects;
-        $count->cup_of_coffee = $request->cup_of_coffee;
-        $count->awards = $request->awards;
-        $count->save();
-        return $this->responseApi([],'All data get added','success',200);
+        $validator = Validator::make($request->all(), [
+            'clients'=>'required|numeric',
+            'projects'=>'required|numeric',
+            'cup_of_coffee' =>'required|numeric',
+            'awards'=>'required|numeric',
+            ]);
+        
+        if ($validator->fails())
+        {
+                return $validator->errors()->all();
+    
+        }else{
+            $count = new Count();
+            $count->clients = $request->clients;
+            $count->projects = $request->projects;
+            $count->cup_of_coffee = $request->cup_of_coffee;
+            $count->awards = $request->awards;
+            $count->save();
+            return $this->responseApi([],'All data get added','success',200);
+        }
     }
 
     public function getAllRecord(Request $request)
@@ -27,15 +40,28 @@ class CountController extends Controller
 
     public function update(Request $request, $id)
     {
-        $count = Count::find($id);
-        $count->clients = $request->clients;
-        $count->projects = $request->projects;
-        $count->cup_of_coffee = $request->cup_of_coffee;
-        $count->awards = $request->awards;
+        $validator = Validator::make($request->all(), [
+            'clients'=>'required|numeric',
+            'projects'=>'required|numeric',
+            'cup_of_coffee' =>'required|numeric',
+            'awards'=>'required|numeric',
+            ]);
+        
+        if ($validator->fails())
+        {
+                return $validator->errors()->all();
+    
+        }else{
+            $count = Count::find($id);
+            $count->clients = $request->clients;
+            $count->projects = $request->projects;
+            $count->cup_of_coffee = $request->cup_of_coffee;
+            $count->awards = $request->awards;
 
-        $update_data = $count->update();
+            $update_data = $count->update();
 
-        return $this->responseApi($update_data,'Data Updated','success',200);
+            return $this->responseApi($update_data,'Data Updated','success',200);
+        }
     }
 
     public function destroy($id)

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use App\Models\TraineeTeam;
-
+use Validator;
 class TraineeTeamController extends Controller
 {
     public function index()
@@ -37,33 +37,48 @@ class TraineeTeamController extends Controller
 
     public function add(Request $request)
     {
-        $teamDetail = new TraineeTeam;
-        $teamDetail->name = $request->input('name');
+        $validator = Validator::make($request->all(), [
+            'name'=>'required',
+            'designation_id' => 'required|numeric',
+            'qualification'=>'required',
+            'experience'=>'required',
+            'photo'=>'required',
+            ]);
         
-        $teamDetail->designation_id = $request->input('designation_id');
-        $teamDetail->qualification = $request->input('qualification');
-        $teamDetail->experience = $request->input('experience');
+            if ($validator->fails())
+            {
+                return $validator->errors()->all();
         
-        $existingRecord = TraineeTeam::first();
-        $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
+            }else
+            {
+                $teamDetail = new TraineeTeam;
+                $teamDetail->name = $request->input('name');
+                
+                $teamDetail->designation_id = $request->input('designation_id');
+                $teamDetail->qualification = $request->input('qualification');
+                $teamDetail->experience = $request->input('experience');
+                
+                $existingRecord = TraineeTeam::first();
+                $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
-        $img_path = $request->photo;
-        $folderPath = "uploads/trainee_team/";
-        
-        $base64Image = explode(";base64,", $img_path);
-        $explodeImage = explode("image/", $base64Image[0]);
-        $imageType = $explodeImage[1];
-        $image_base64 = base64_decode($base64Image[1]);
+                $img_path = $request->photo;
+                $folderPath = "uploads/trainee_team/";
+                
+                $base64Image = explode(";base64,", $img_path);
+                $explodeImage = explode("image/", $base64Image[0]);
+                $imageType = $explodeImage[1];
+                $image_base64 = base64_decode($base64Image[1]);
 
-        $file = $recordId . '.' . $imageType;
-        $file_dir = $folderPath . $file;
+                $file = $recordId . '.' . $imageType;
+                $file_dir = $folderPath . $file;
 
-        file_put_contents($file_dir, $image_base64);
-        $teamDetail->photo = $file;
+                file_put_contents($file_dir, $image_base64);
+                $teamDetail->photo = $file;
 
-        $teamDetail->save();
+                $teamDetail->save();
 
-        return response()->json(['status' => 'Success', 'message' => 'Added successfully','StatusCode'=>'200']);
+                return response()->json(['status' => 'Success', 'message' => 'Added successfully','StatusCode'=>'200']);
+            }
     }
     public function destroy($id)
     {

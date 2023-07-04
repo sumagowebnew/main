@@ -5,23 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Questions;
-
+use Validator;
 class QuestionController extends Controller
 {
     public function add(Request $request)
     {
-        $questions = new Questions();
-        // $data = [
-        //     'name'     => $request->name,
-        //     'email'    => $request->email,
-        //     'question' => $request->question,
-        // ];
-        // $insert_data = Questions::insert($data);
-        $questions->name = $request->name;
-        $questions->email = $request->email;
-        $questions->question = $request->question;
-        $questions->save();
-        return $this->responseApi([],'All data get added','success',200);
+        $validator = Validator::make($request->all(), [
+            'name'=>'required',
+            'email' => 'required|email',
+            'question'=>'required',
+            ]);
+        
+            if ($validator->fails())
+            {
+                return $validator->errors()->all();
+        
+            }else
+            {
+                $questions = new Questions();
+                $questions->name = $request->name;
+                $questions->email = $request->email;
+                $questions->question = $request->question;
+                $questions->save();
+                return $this->responseApi([],'All data get added','success',200);
+            }
     }
 
     public function getAllRecord(Request $request)

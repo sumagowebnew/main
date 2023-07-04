@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContactEnquiries;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Validator;
 class ContactEnquiriesController extends Controller
 {
    
@@ -81,20 +81,27 @@ class ContactEnquiriesController extends Controller
  */
     public function getAdd(Request $request)
     {
-        $contactEnquiries = new ContactEnquiries();
-        // $data = [
-        //     'name'      => $request->name,
-        //     'mobile_no' => $request->mobile_no,
-        //     'email'     => $request->email,
-        //     'messege'   => $request->messege,
-        // ];
-        $contactEnquiries->name = $request->name;
-        $contactEnquiries->mobile_no = $request->mobile_no;
-        $contactEnquiries->email = $request->email;
-        $contactEnquiries->messege = $request->messege;
-        $contactEnquiries->save();
-        // $insert_data = ContactEnquiries::insert($data);
-        return $this->responseApi([],'All data get added','success',200);
+        $validator = Validator::make($request->all(), [
+            'name'=>'required',
+            'email'=>'required|email',
+            'mobile_no' => 'required|numeric',
+            'messege'=>'required',
+            ]);
+        
+        if ($validator->fails())
+        {
+            return $validator->errors()->all();
+    
+        }else
+        {
+            $contactEnquiries = new ContactEnquiries();
+            $contactEnquiries->name = $request->name;
+            $contactEnquiries->mobile_no = $request->mobile_no;
+            $contactEnquiries->email = $request->email;
+            $contactEnquiries->messege = $request->messege;
+            $contactEnquiries->save();
+            return $this->responseApi([],'All data get added','success',200);
+        }
     }
 
     public function getAllRecord(Request $request)
