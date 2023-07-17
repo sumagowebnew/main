@@ -8,77 +8,6 @@ use App\Http\Controllers\Controller;
 use Validator;
 class ContactDetailsController extends Controller
 {
-   
-
- /**
-
- * @OA\Post(
-
- * path="/contact/get-add",
-
- * summary="Contcat",
-
- * description="Contcat",
-
- * tags={"Contcat"},
-
- * @OA\RequestBody(
-
- *    required=true,
-
- *    description="Provide All Info Below",
-
- *    @OA\JsonContent(
-
- *       required={"name","email","password"},
-
- *       @OA\Property(property="name", type="string", format="text", example="test123"),
-
- *       @OA\Property(property="email", type="email", format="text", example="test@example.org"),
-
- *       @OA\Property(property="mobile_no", type="string", format="text", example="1234567890"),
- 
- *       @OA\Property(property="messege", type="string", format="text", example="Test Messege"),
-
- *    ),
-
- * ),
-
- * @OA\Response(
-
- *    response=200,
-
- *    description="Login Success",
-
- *    @OA\JsonContent(
-
- *       @OA\Property(property="status", type="string", example="success"),
-
- *       @OA\Property(property="message", type="string", example="Contact Added Successfull")
-
- *        )
-
- *     ), 
-
- *   @OA\Response(
-
- *    response=500,
-
- *    description="Log Information store failed",
-
- *    @OA\JsonContent(
-
- *       @OA\Property(property="status", type="string", example="error"),
-
- *       @OA\Property(property="message", type="string", example="Some issue found")
-
- *        )
-
- *     )
-
- * )
-
- */
     public function getAdd(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -102,6 +31,17 @@ class ContactDetailsController extends Controller
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        
+            $contact_details = ContactDetails::find($id);
+            $contact_details->mobile_no = $request->mobile_no;
+            $contact_details->email_id = $request->email_id;
+            $contact_details->address = $request->address;
+            $update_data = $contact_details->update();
+            return $this->responseApi($update_data,'Data Updated','success',200);
+    }
+
     public function getAllRecord()
     {
         // Get all data from the database
@@ -112,9 +52,11 @@ class ContactDetailsController extends Controller
         foreach ($all_data as $item) {
             $no = [];
             $mail=[];
+            $add=[];
             $data = $item->toArray();
             $mobile_no = $data['mobile_no'];
             $email_id = $data['email_id'];
+            $address = $data['address'];
             // json_decode(json_encode($mobile_no), true);
             foreach (json_decode($mobile_no) as $key => $value){ 
                 array_push($no,$value);
@@ -123,10 +65,16 @@ class ContactDetailsController extends Controller
             foreach (json_decode($email_id) as $key => $value){ 
                 array_push($mail,$value);
             }
-           
+
+            foreach (json_decode($address) as $key => $value){ 
+                array_push($add,$value);
+            }
+            $response['id'] = $data['id'];
             $response['email_id'] = $mail;
-            $response['address'] = $data['address'];
+            $response['address'] = $add;
             $response['mobile_no'] = $no;
+            $response['created_at'] = $data['created_at'];
+            $response['updated_at'] = $data['updated_at'];
             // $address = $data['address'];
         }
 
