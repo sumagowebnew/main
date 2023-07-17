@@ -22,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\ContactEnquiriesController' => $baseDir . '/app/Http/Controllers/ContactEnquiriesController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\CountController' => $baseDir . '/app/Http/Controllers/CountController.php',
+    'App\\Http\\Controllers\\DashboardController' => $baseDir . '/app/Http/Controllers/DashboardController.php',
     'App\\Http\\Controllers\\DesignationController' => $baseDir . '/app/Http/Controllers/DesignationController.php',
     'App\\Http\\Controllers\\DevelopementTeamController' => $baseDir . '/app/Http/Controllers/DevelopementTeamController.php',
     'App\\Http\\Controllers\\EventsController' => $baseDir . '/app/Http/Controllers/EventsController.php',

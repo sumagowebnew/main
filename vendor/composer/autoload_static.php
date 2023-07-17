@@ -695,6 +695,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'App\\Http\\Controllers\\ContactEnquiriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContactEnquiriesController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CountController' => __DIR__ . '/../..' . '/app/Http/Controllers/CountController.php',
+        'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\DesignationController' => __DIR__ . '/../..' . '/app/Http/Controllers/DesignationController.php',
         'App\\Http\\Controllers\\DevelopementTeamController' => __DIR__ . '/../..' . '/app/Http/Controllers/DevelopementTeamController.php',
         'App\\Http\\Controllers\\EventsController' => __DIR__ . '/../..' . '/app/Http/Controllers/EventsController.php',

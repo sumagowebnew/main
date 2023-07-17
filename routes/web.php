@@ -129,9 +129,13 @@ $router->get('/career_enquirires/{id}/download/cv', 'CareerEnquiriesController@d
 $router->get('/career_enquirires/{id}/download/cover_letter', 'CareerEnquiriesController@downloadCoverLetter');
 $router->post('/career_enquirires/add', 'CareerEnquiriesController@add');
 $router->delete('/career_enquirires/delete/{id}', 'CareerEnquiriesController@destroy');
+
 $router->get('/dashboard/get_dashboard_count', 'DashboardController@get_dashboard_count');
 
-
+$router->get('/contact_details/get-all-record', 'ContactDetailsController@getAllRecord');
+$router->post('/contact_details/add', 'ContactDetailsController@getAdd');
+$router->post('/contact_details/update/{id}', 'ContactDetailsController@update');
+$router->delete('/contact_details/delete/{id}', 'ContactDetailsController@destroy');
 
 $router->group(['middleware' => 'auth'], function () use ($router) {
 
