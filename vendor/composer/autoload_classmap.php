@@ -34,6 +34,7 @@ return array(
     'App\\Http\\Controllers\\NewsController' => $baseDir . '/app/Http/Controllers/NewsController.php',
     'App\\Http\\Controllers\\PortfolioController' => $baseDir . '/app/Http/Controllers/PortfolioController.php',
     'App\\Http\\Controllers\\QuestionController' => $baseDir . '/app/Http/Controllers/QuestionController.php',
+    'App\\Http\\Controllers\\ServiceController' => $baseDir . '/app/Http/Controllers/ServiceController.php',
     'App\\Http\\Controllers\\TestController' => $baseDir . '/app/Http/Controllers/TestController.php',
     'App\\Http\\Controllers\\TraineeTeamController' => $baseDir . '/app/Http/Controllers/TraineeTeamController.php',
     'App\\Http\\Controllers\\TrainingController' => $baseDir . '/app/Http/Controllers/TrainingController.php',

@@ -142,6 +142,11 @@ $router->post('/vacancy/add', 'VacancyController@getAdd');
 $router->post('/vacancy/update/{id}', 'VacancyController@update');
 $router->delete('/vacancy/delete/{id}', 'VacancyController@destroy');
 
+$router->get('/service/get-all-record', 'ServiceController@index');
+$router->post('/service/add', 'ServiceController@add');
+$router->post('/service/update/{id}', 'ServiceController@update');
+$router->delete('/service/delete/{id}', 'ServiceController@destroy');
+
 $router->group(['middleware' => 'auth'], function () use ($router) {
 
 $router->post('/logout', 'AuthController@logout');
