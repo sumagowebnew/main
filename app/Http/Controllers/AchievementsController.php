@@ -3,13 +3,40 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Achievements;
-use App\Models\Achievment_images;
+use App\Models\Achievments_images;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Validator;
 class AchievementsController extends Controller
 {
+
+public function index()
+{
+    // Get all data from the database
+    $achievement = Achievements::get();
+
+    $response = [];
+
+    foreach ($achievement as $item)
+    {
+       
+        $data = $item->toArray();
+        $achievements_images = Achievments_images::where('achievement_id', $data['id'])->get();
+
+        foreach ($achievements_images as $amt) 
+        {
+            $img = $amt->toArray();
+            $logo = $img['image'];
+            $imagePath =str_replace('\\', '/', base_path())."/uploads/achievement/" . $logo;
+            $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
+            $data['images'] = $base64;
+            $response[] = $data;
+        }
+    }
+
+    return response()->json($response);
+}
 public function add(Request $request)
 {
     $validator = Validator::make($request->all(), [
@@ -26,25 +53,37 @@ public function add(Request $request)
         // Get the array of base64-encoded images from the request
         $imageDataArray = $request->input('images');
         // Loop through the images and store them in the database
-        foreach ($imageDataArray as $imageData) {
-            // Decode the base64 image data
-            $decodedImage = base64_decode($imageData);
+        $i=0;
+        foreach($imageDataArray as $name)
+        {
 
-            // Generate a unique file name for the image
-            $fileName = uniqid() . '.jpg';
+            list($type, $name) = explode(';', $name);
+            list(, $name)      = explode(',', $name);
+            $data = base64_decode($name);
+            $i +=1;
 
-            // Store the image in a directory (e.g., public/storage/images)
-            Storage::disk('public')->put('uploads/achievement/' . $fileName, $decodedImage);
+            $imagename= 'Image'.$i.'.jpeg';
+            // $destinationPath = public_path('images');
+            $path = str_replace('\\', '/', base_path()) ."/uploads/achievement/".$imagename;
+            $res = file_put_contents($path, $data);
 
             // Create a new image record in the database
-            $image = new Achievment_images();
-            $image->images = $fileName;
-            $image->title_id = $title->id;
-            $image->save();
+                $image = new Achievments_images();
+                $image->achievement_id = $title->id;
+                $image->image = $imagename;
+                $image->save();
         }
-    
         return response()->json(['message' => 'Form submitted successfully']);
     }
 }
+
+public function destroy($id)
+    {
+        $all_data=[];
+        $adminTeam = Achievements::find($id);
+        $adminTeam->delete();
+        // return response()->json("Deleted Successfully!");
+        return $this->responseApi($all_data,'Deleted Successfully!','success',200);
+    }
 
 }

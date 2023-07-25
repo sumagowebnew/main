@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Achievements extends Model
 {
-    protected $fillable = ['title', 'other_attributes'];
+    protected $fillable = ['title'];
     
-    public function images()
+    public function image()
     {
-        return $this->hasMany(Achievment_images::class);
+        return $this->hasMany(Achievment_image::class);
     }
 }

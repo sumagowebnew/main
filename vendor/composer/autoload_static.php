@@ -740,6 +740,7 @@ class ComposerStaticInitf5ba43c2bac7a9d7a6a6e167b911f710
         'App\\Models\\News' => __DIR__ . '/../..' . '/app/Models/News.php',
         'App\\Models\\Portfolio' => __DIR__ . '/../..' . '/app/Models/Portfolio.php',
         'App\\Models\\Questions' => __DIR__ . '/../..' . '/app/Models/Questions.php',
+        'App\\Models\\Service' => __DIR__ . '/../..' . '/app/Models/Service.php',
         'App\\Models\\TraineeTeam' => __DIR__ . '/../..' . '/app/Models/TraineeTeam.php',
         'App\\Models\\Training' => __DIR__ . '/../..' . '/app/Models/Training.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
