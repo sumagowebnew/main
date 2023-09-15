@@ -47,7 +47,7 @@ public function store(Request $request)
                 $event = new Event();
                 
                 // Check if there are any existing records
-                $existingRecord = Event::first();
+                $existingRecord = Event::orderBy('id','DESC')->first();
                 $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
                 $img_path = $request->image_file;

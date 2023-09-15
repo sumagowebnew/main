@@ -48,7 +48,7 @@ public function store(Request $request)
             $birthday = new birthday();
             
             // Check if there are any existing records
-            $existingRecord = Birthday::first();
+            $existingRecord = Birthday::orderBy('id','DESC')->first();
             $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
             $img_path = $request->image_file;

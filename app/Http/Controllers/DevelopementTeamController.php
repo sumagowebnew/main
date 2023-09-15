@@ -56,7 +56,7 @@ class DevelopementTeamController extends Controller
                 $teamDetail->qualification = $request->input('qualification');
                 $teamDetail->experience = $request->input('experience');
                 
-                $existingRecord = DevelopementTeam::first();
+                $existingRecord = DevelopementTeam::orderBy('id','DESC')->first();
                 $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
                 $img_path = $request->photo;

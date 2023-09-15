@@ -69,7 +69,7 @@ class PortfolioController extends Controller
                 $portfolio->website_link = $request->website_link;
 
                     try{
-                        $existingRecord = Portfolio::first();
+                        $existingRecord = Portfolio::orderBy('id','DESC')->first();
                         $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
                         $img_path = $request->image_file;
 

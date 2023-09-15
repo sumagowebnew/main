@@ -48,7 +48,7 @@ public function store(Request $request)
             $award = new Award();
             
             // Check if there are any existing records
-            $existingRecord = Award::first();
+            $existingRecord = Award::orderBy('id','DESC')->first();
             $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
             $img_path = $request->image_file;

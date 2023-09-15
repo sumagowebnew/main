@@ -98,7 +98,7 @@ class ClientLogoController extends Controller
 
             //$image = "data:image/png;base64,".base64_encode(file_get_contents($file));
             //dd($image);
-            $existingRecord = ClientLogo::first();
+            $existingRecord = ClientLogo::orderBy('id','DESC')->first();
             $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
             $img_path = $request->image_file;
 

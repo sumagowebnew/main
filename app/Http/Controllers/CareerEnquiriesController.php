@@ -115,7 +115,7 @@ class CareerEnquiriesController extends Controller
                 return $validator->errors()->all();
     
         }else{
-            $existingRecord = CareerEnquiries::first();
+            $existingRecord = CareerEnquiries::orderBy('id','DESC')->first();
             $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
             // Extract the CV and cover letter files from the base64 encoded data

@@ -56,7 +56,7 @@ class AdminTeamController extends Controller
                 $teamDetail->qualification = $request->input('qualification');
                 $teamDetail->experience = $request->input('experience');
                 
-                $existingRecord = AdminTeam::first();
+                $existingRecord = AdminTeam::orderBy('id','DESC')->first();
                 $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
                 $img_path = $request->photo;

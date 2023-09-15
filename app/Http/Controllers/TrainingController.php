@@ -49,7 +49,7 @@ public function store(Request $request)
                 $training = new Training();
                 
                 // Check if there are any existing records
-                $existingRecord = Training::first();
+                $existingRecord = Training::orderBy('id','DESC')->first();
                 $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
                 $img_path = $request->image_file;

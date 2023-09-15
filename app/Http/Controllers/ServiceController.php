@@ -49,7 +49,7 @@ class ServiceController extends Controller
 
                         $img_path = $request->image;
                         // Check if there are any existing records
-                        $existingRecord = Service::first();
+                        $existingRecord = Service::orderBy('id','DESC')->first();
                         $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
                             $folderPath = "uploads/service_images/";
