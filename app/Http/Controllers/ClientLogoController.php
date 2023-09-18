@@ -42,7 +42,9 @@ class ClientLogoController extends Controller
             $data = $clientLogo->toArray();
 
             $logo = $data['image'];
-            $imagePath = str_replace('\\', '/', storage_path()) ."/all_web_data/images/client_logo/".$logo;
+
+            $imagePath = "uploads/client_logo/" . $logo;
+
             $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
 
             $data['image'] = $base64;
@@ -100,8 +102,7 @@ class ClientLogoController extends Controller
             $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
             $img_path = $request->image_file;
 
-                createDirecrotory('/all_web_data/images/client_logo/');
-                $folderPath = str_replace('\\', '/', storage_path()) ."/all_web_data/images/client_logo/";
+                $folderPath = "uploads/client_logo/";
                 
                 $base64Image = explode(";base64,", $img_path);
                 // dd($base64Image);
@@ -146,7 +147,7 @@ class ClientLogoController extends Controller
         $clientlogo = ClientLogo::find($id);
         $logo = $clientlogo->image;
 
-        $imagepath = str_replace('\\', '/', storage_path()) ."/all_web_data/images/client_logo/". $logo;
+        $imagepath="uploads/client_logo/". $logo;
 
         $base64 = "data:image/png;base64,".base64_encode(file_get_contents($imagepath));
 
@@ -184,7 +185,7 @@ class ClientLogoController extends Controller
 
         if($request->hasfile('image'))
         {
-           $destination = str_replace('\\', '/', storage_path()) ."/all_web_data/images/client_logo/";
+           $destination = 'uploads/client_logo/'.$client_logo->image;
            if(File::exists($destination))
            {
              File::delete($destination);
@@ -213,7 +214,7 @@ class ClientLogoController extends Controller
     {
         $all_data=[];
         $clientlogo = ClientLogo::find($id);
-        $destination = str_replace('\\', '/', storage_path()) ."/all_web_data/images/client_logo/".$clientlogo->image;
+        $destination = 'uploads/client_logo/'.$clientlogo->image;
            if(File::exists($destination))
            {
              File::delete($destination);
