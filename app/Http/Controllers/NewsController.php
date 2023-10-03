@@ -66,7 +66,7 @@ class NewsController extends Controller
 
                         $img_path = $request->image_file;
                         // Check if there are any existing records
-                        $existingRecord = News::first();
+                        $existingRecord = News::orderBy('id','DESC')->first();
                         $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
                             $folderPath = "uploads/news/";
