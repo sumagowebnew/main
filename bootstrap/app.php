@@ -104,14 +104,14 @@ $app->routeMiddleware([
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
-$app->register(Laravel\Passport\PassportServiceProvider::class);
+// $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(App\Providers\TokenTimeServiceProvider::class);
 $app->register(\SwaggerLume\ServiceProvider::class);
-
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 
 
@@ -131,7 +131,7 @@ $app->register(\SwaggerLume\ServiceProvider::class);
 |
 */
 
-\Dusterio\LumenPassport\LumenPassport::routes($app, ['prefix' => 'v1/oauth']);
+// \Dusterio\LumenPassport\LumenPassport::routes($app, ['prefix' => 'v1/oauth']);
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
