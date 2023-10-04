@@ -1,89 +1,111 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Achievements;
-use App\Models\Achievments_images;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use App\Models\Achievements;
 use Validator;
 class AchievementsController extends Controller
 {
-
-public function index()
-{
-    // Get all data from the database
-    $achievement = Achievements::get();
-
-    $response = [];
-
-    foreach ($achievement as $item)
+    public function index()
     {
-       
-        $data = $item->toArray();
-        $achievements_images = Achievments_images::where('achievement_id', $data['id'])->get();
+        // Get all data from the database
+        $birthday = Achievements::get();
 
-        foreach ($achievements_images as $amt) 
-        {
-            $img = $amt->toArray();
-            $logo = $img['image'];
-            $imagePath =str_replace('\\', '/', base_path())."/uploads/achievement/" . $logo;
+        $response = [];
+
+        foreach ($birthday as $item) {
+            $data = $item->toArray();
+
+            $logo = $data['image'];
+
+            $imagePath = "uploads/achievements/" . $logo;
+
             $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
-            $data['images'] = $base64;
+
+            $data['image'] = $base64;
+
             $response[] = $data;
         }
-    }
 
-    return response()->json($response);
-}
+        return response()->json($response);
+    }
+    
 public function add(Request $request)
 {
     $validator = Validator::make($request->all(), [
-        'title' => 'required',
-        'images' => 'required',
-    ]);
-    if ($validator->fails()) {
-        return $validator->errors()->all();
+        'image_file'=>'required',
+        ]);
+    
+    if ($validator->fails())
+    {
+            return $validator->errors()->all();
 
     }else{
-        // Get the title name from the request
-        $titleName = $request->input('title');
-        $title = Achievements::create(['title' => $titleName]);
-        // Get the array of base64-encoded images from the request
-        $imageDataArray = $request->input('images');
-        // Loop through the images and store them in the database
-        $i=0;
-        foreach($imageDataArray as $name)
-        {
+        try {
+            $achievements = new achievements();
+            
+            // Check if there are any existing records
+            $existingRecord = Achievements::orderBy('id','DESC')->first();
+            $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
-            list($type, $name) = explode(';', $name);
-            list(, $name)      = explode(',', $name);
-            $data = base64_decode($name);
-            $i +=1;
+            $img_path = $request->image_file;
+            $folderPath = "uploads/achievements/";
+            dd($folderPath);
+            
+            $base64Image = explode(";base64,", $img_path);
+            $explodeImage = explode("image/", $base64Image[0]);
+            $imageType = $explodeImage[1];
+            $image_base64 = base64_decode($base64Image[1]);
 
-            $imagename= 'Image'.$i.'.jpeg';
-            // $destinationPath = public_path('images');
-            $path = str_replace('\\', '/', base_path()) ."/uploads/achievement/".$imagename;
-            $res = file_put_contents($path, $data);
+            $file = $recordId . '.' . $imageType;
+            $file_dir = $folderPath . $file;
 
-            // Create a new image record in the database
-                $image = new Achievments_images();
-                $image->achievement_id = $title->id;
-                $image->image = $imagename;
-                $image->save();
+            file_put_contents($file_dir, $image_base64);
+            $achievements->image = $file;
+            
+            $achievements->save();
+
+            return response()->json(['status' => 'Success', 'message' => 'Uploaded successfully','statusCode' => '200']);
+        } 
+        catch (Exception $e) {
+            return response()->json(['status' => 'error', 'message' => $e->getMessage(),'statusCode' => '201']);
         }
-        return response()->json(['message' => 'Form submitted successfully']);
     }
-}
 
-public function destroy($id)
+    }
+
+    
+    public function show($id)
+    {
+        $achievements = achievements::find($id);
+        $logo = $achievements->image;
+
+        $imagepath="uploads/achievements/". $logo;
+
+        $base64 = "data:image/png;base64,".base64_encode(file_get_contents($imagepath));
+
+        return response()->json($base64);
+        
+        // $all_data = birthday::get()->toArray();
+        // return $this->responseApi($all_data,'All data get','success',200);
+    }
+
+
+    public function destroy($id)
     {
         $all_data=[];
-        $adminTeam = Achievements::find($id);
-        $adminTeam->delete();
+        $achievements = achievements::find($id);
+        $destination = 'uploads/achievements/'.$achievements->image;
+           if(File::exists($destination))
+           {
+             File::delete($destination);
+           }
+        $achievements->delete();
         // return response()->json("Deleted Successfully!");
-        return $this->responseApi($all_data,'Deleted Successfully!','success',200);
+        return $this->responseApi($all_data,'Birthday Deleted Successfully!','success',200);
     }
 
 }
