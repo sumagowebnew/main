@@ -53,7 +53,7 @@ public function add(Request $request)
 
             $img_path = $request->image_file;
             $folderPath = "uploads/achievements/";
-            dd($folderPath);
+            // dd($folderPath);
             
             $base64Image = explode(";base64,", $img_path);
             $explodeImage = explode("image/", $base64Image[0]);
