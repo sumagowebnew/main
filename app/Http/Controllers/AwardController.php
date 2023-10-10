@@ -73,6 +73,33 @@ public function store(Request $request)
             return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
+}
+
+public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'image_file' => 'required'
+        ]);
+
+        $award = Award::find($id);
+
+        if($request->hasfile('image_file'))
+        {
+           $destination = 'uploads/award/'.$award->image_file;
+           if(File::exists($destination))
+           {
+             File::delete($destination);
+           }
+
+           $file = $request->file('image_file');
+           $extension = $file->getClientOriginalName();
+           $filename = time().$extension;
+           $file->move(('uploads/award'),$filename);
+           $award->image_file = $filename;
+        }
+           $award->update();
+
+           return response()->json($award);
     }
 
     

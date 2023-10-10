@@ -101,6 +101,8 @@ public function store(Request $request)
 
            return response()->json($event);
     }
+
+    
     
     public function show($id)
     {

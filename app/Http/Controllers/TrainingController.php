@@ -77,7 +77,32 @@ public function store(Request $request)
 
     }
 
-    
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'image_file' => 'required'
+        ]);
+
+        $training = Training::find($id);
+
+        if($request->hasfile('image_file'))
+        {
+           $destination = 'uploads/training/'.$training->image_file;
+           if(File::exists($destination))
+           {
+             File::delete($destination);
+           }
+
+           $file = $request->file('image_file');
+           $extension = $file->getClientOriginalName();
+           $filename = time().$extension;
+           $file->move(('uploads/training'),$filename);
+           $training->image_file = $filename;
+        }
+           $training->update();
+
+           return response()->json($training);
+    }
     public function show($id)
     {
         $training = Training::find($id);
