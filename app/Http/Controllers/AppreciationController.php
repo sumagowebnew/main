@@ -100,6 +100,7 @@ public function store(Request $request)
 
            return response()->json($appreciation);
     }
+
     
     public function show($id)
     {
