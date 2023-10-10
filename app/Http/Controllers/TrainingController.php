@@ -97,7 +97,7 @@ public function store(Request $request)
            $extension = $file->getClientOriginalName();
            $filename = time().$extension;
            $file->move(('uploads/training'),$filename);
-           $training->image_file = $filename;
+           $training->image = $filename;
         }
            $training->update();
 

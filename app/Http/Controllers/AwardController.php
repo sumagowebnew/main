@@ -95,7 +95,7 @@ public function update(Request $request, $id)
            $extension = $file->getClientOriginalName();
            $filename = time().$extension;
            $file->move(('uploads/award'),$filename);
-           $award->image_file = $filename;
+           $award->image = $filename;
         }
            $award->update();
 

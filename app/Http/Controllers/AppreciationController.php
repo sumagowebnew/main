@@ -94,7 +94,7 @@ public function store(Request $request)
            $extension = $file->getClientOriginalName();
            $filename = time().$extension;
            $file->move(('uploads/appreciation'),$filename);
-           $appreciation->image_file = $filename;
+           $appreciation->image = $filename;
         }
            $appreciation->update();
 

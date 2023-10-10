@@ -85,7 +85,7 @@ public function store(Request $request)
 
         if($request->hasfile('image_file'))
         {
-           $destination = 'uploads/event/'.$event->image_file;
+           $destination = 'uploads/event/'.$event->image;
            if(File::exists($destination))
            {
              File::delete($destination);
@@ -95,7 +95,7 @@ public function store(Request $request)
            $extension = $file->getClientOriginalName();
            $filename = time().$extension;
            $file->move(('uploads/event'),$filename);
-           $event->image_file = $filename;
+           $event->image = $filename;
         }
            $event->update();
 
