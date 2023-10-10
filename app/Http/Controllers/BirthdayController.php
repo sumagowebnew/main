@@ -18,15 +18,10 @@ class BirthdayController extends Controller
 
         foreach ($birthday as $item) {
             $data = $item->toArray();
-
             $logo = $data['image'];
-
             $imagePath = "uploads/birthday/" . $logo;
-
             $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
-
             $data['image'] = $base64;
-
             $response[] = $data;
         }
 
@@ -76,7 +71,32 @@ public function store(Request $request)
 
     }
 
-    
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'image_file' => 'required'
+        ]);
+
+        $birthday = Birthday::find($id);
+
+        if($request->hasfile('image_file'))
+        {
+           $destination = 'uploads/birthday/'.$birthday->image_file;
+           if(File::exists($destination))
+           {
+             File::delete($destination);
+           }
+
+           $file = $request->file('image_file');
+           $extension = $file->getClientOriginalName();
+           $filename = time().$extension;
+           $file->move(('uploads/birthday'),$filename);
+           $birthday->image_file = $filename;
+        }
+           $birthday->update();
+
+           return response()->json($birthday);
+    }
     public function show($id)
     {
         $birthday = birthday::find($id);
