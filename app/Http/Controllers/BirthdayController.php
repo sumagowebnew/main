@@ -97,6 +97,8 @@ public function store(Request $request)
 
            return response()->json($birthday);
     }
+
+   
     public function show($id)
     {
         $birthday = birthday::find($id);
