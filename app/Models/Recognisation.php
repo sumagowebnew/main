@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recognisation extends Model
 {
-    //
+    protected $table = "recognisation";
+
 }
