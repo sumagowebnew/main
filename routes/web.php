@@ -121,6 +121,11 @@ $router->post('/mou/add', 'MouController@add');
 $router->post('/mou/update/{id}', 'MouController@update');
 $router->delete('/mou/delete/{id}', 'MouController@destroy');
 
+$router->get('/recognisation/get-all-record', 'RecognisationController@index');
+$router->post('/recognisation/add', 'RecognisationController@add');
+$router->post('/recognisation/update/{id}', 'RecognisationController@update');
+$router->delete('/recognisation/delete/{id}', 'RecognisationController@destroy');
+
 $router->get('/achievement/get-all-record', 'AchievementsController@index');
 $router->post('/achievement/add', 'AchievementsController@add');
 $router->delete('/achievement/delete/{id}', 'AchievementsController@destroy');
