@@ -126,6 +126,11 @@ $router->post('/recognisation/add', 'RecognisationController@add');
 $router->post('/recognisation/update/{id}', 'RecognisationController@update');
 $router->delete('/recognisation/delete/{id}', 'RecognisationController@destroy');
 
+$router->get('/funatwork/get-all-record', 'FunatworkController@index');
+$router->post('/funatwork/add', 'FunatworkController@add');
+$router->post('/funatwork/update/{id}', 'FunatworkController@update');
+$router->delete('/funatwork/delete/{id}', 'FunatworkController@destroy');
+
 $router->get('/achievement/get-all-record', 'AchievementsController@index');
 $router->post('/achievement/add', 'AchievementsController@add');
 $router->delete('/achievement/delete/{id}', 'AchievementsController@destroy');
