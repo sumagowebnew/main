@@ -87,7 +87,7 @@ class MouController extends Controller
                             $file = $recordId . '.' . $imageType;
                             $file_dir = $folderPath . $file;
                             file_put_contents($file_dir, $image_base64);
-                            $mou->image = $file;
+                            $mou->mou_image = $file;
 
                             
                             $img_path1 = $request->model_file;
