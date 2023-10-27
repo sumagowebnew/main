@@ -109,6 +109,7 @@ $router->delete('/designation/delete/{id}', 'DesignationController@destroy');
 
 $router->get('/news/get-all-record', 'NewsController@index');
 $router->post('/news/add', 'NewsController@add');
+$router->post('/news/update/{id}', 'NewsController@update');
 $router->delete('/news/delete/{id}', 'NewsController@destroy');
 
 $router->get('/certificate/get-all-record', 'CertificateController@index');
@@ -117,6 +118,7 @@ $router->delete('/certificate/delete/{id}', 'CertificateController@destroy');
 
 $router->get('/mou/get-all-record', 'MouController@index');
 $router->post('/mou/add', 'MouController@add');
+$router->post('/mou/update/{id}', 'MouController@update');
 $router->delete('/mou/delete/{id}', 'MouController@destroy');
 
 $router->get('/achievement/get-all-record', 'AchievementsController@index');
