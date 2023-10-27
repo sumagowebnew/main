@@ -46,14 +46,19 @@ class RecognisationController extends Controller
                     try{
 
                         $img_path = $request->image;
-                        $existingRecord = Recognisation::orderBy('id','DESC')->first();
-                        $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
+                        
+                            $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+                            $charactersLength = strlen($characters);
+                            $randomString = '';
+                            for ($i = 0; $i < 18; $i++) {
+                                $randomString .= $characters[rand(0, $charactersLength - 1)];
+                            }
                             $folderPath = "uploads/recognisation/";
                             $base64Image = explode(";base64,", $img_path);
                             $explodeImage = explode("image/", $base64Image[0]);
                             $imageType = $explodeImage[1];
                             $image_base64 = base64_decode($base64Image[1]);
-                            $file = $recordId . '.' . $imageType;
+                            $file = $randomString . '.' . $imageType;
                             $file_dir = $folderPath . $file;
                             file_put_contents($file_dir, $image_base64);
                             $reco->image = $file;                        
