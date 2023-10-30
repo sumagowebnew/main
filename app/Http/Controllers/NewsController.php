@@ -31,7 +31,7 @@ class NewsController extends Controller
 
             $base64_1 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath1));
 
-            $data['news_image'] = $base64;
+            $data['image'] = $base64;
 
             $data['news_model'] = $base64_1;
 
@@ -81,7 +81,6 @@ class NewsController extends Controller
                             $file_dir = $folderPath . $file;
                             file_put_contents($file_dir, $image_base64);
                             $news->news_image = $file;
-
                             $img_path1 = $request->model_file;
 
                             $folderPath1 = "uploads/news_model/";
