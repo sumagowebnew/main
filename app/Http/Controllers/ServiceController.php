@@ -44,6 +44,8 @@ class ServiceController extends Controller
                 $service = new Service();
                 $service->title = $request->title;
                 $service->description = $request->description;
+                $service->device_type = $request->device_type;
+
             
                     try{
 
@@ -80,7 +82,8 @@ class ServiceController extends Controller
         $service = Service::find($id);
         $service->title = $request->title;
         $service->description = $request->description;
-    
+        $service->device_type = $request->device_type;
+
             try{
                     $img_path = $request->image;
 
