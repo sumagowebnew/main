@@ -139,6 +139,11 @@ $router->get('/developement_team/get-all-record', 'DevelopementTeamController@in
 $router->post('/developement_team/add', 'DevelopementTeamController@add');
 $router->delete('/developement_team/delete/{id}', 'DevelopementTeamController@destroy');
 
+$router->get('/design_team/get-all-record', 'DesignTeamController@index');
+$router->post('/design_team/add', 'DesignTeamController@add');
+$router->delete('/design_team/delete/{id}', 'DesignTeamController@destroy');
+
+
 $router->get('/admin_team/get-all-record', 'AdminTeamController@index');
 $router->post('/admin_team/add', 'AdminTeamController@add');
 $router->delete('/admin_team/delete/{id}', 'AdminTeamController@destroy');
