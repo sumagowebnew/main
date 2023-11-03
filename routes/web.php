@@ -64,8 +64,9 @@ $router->get('/vacancy/get-all-record', 'VacancyController@getAllRecord');
 $router->get('/service/get-all-record', 'ServiceController@index');
 
 
-
-$router->get('/clientLogo/show/{id}', 'ClientLogoController@show');
+$router->group(['middleware' => 'auth'], function () use ($router)
+{
+    $router->get('/clientLogo/show/{id}', 'ClientLogoController@show');
     $router->post('/clientLogo/add', 'ClientLogoController@store');
     $router->post('/clientLogo/update/{id}', 'ClientLogoController@update');
     $router->delete('/clientLogo/delete/{id}', 'ClientLogoController@destroy');
@@ -111,6 +112,7 @@ $router->get('/clientLogo/show/{id}', 'ClientLogoController@show');
     $router->delete('/news/delete/{id}', 'NewsController@destroy');
     $router->post('/certificate/add', 'CertificateController@add');
     $router->delete('/certificate/delete/{id}', 'CertificateController@destroy');
+    $router->post('/mou/add', 'MouController@add');
     $router->post('/mou/update/{id}', 'MouController@update');
     $router->delete('/mou/delete/{id}', 'MouController@destroy');
     $router->post('/recognisation/add', 'RecognisationController@add');
@@ -144,11 +146,4 @@ $router->get('/clientLogo/show/{id}', 'ClientLogoController@show');
     $router->get('/developement_team/get-all-record', 'DevelopementTeamController@index');
 
 
-
-
-$router->group(['middleware' => 'auth'], function () use ($router)
-{
-    $router->post('/mou/add', 'MouController@add');
-
-    
 });
