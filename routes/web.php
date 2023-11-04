@@ -62,6 +62,9 @@ $router->get('/dashboard/get_dashboard_count', 'DashboardController@get_dashboar
 $router->get('/contact_details/get-all-record', 'ContactDetailsController@getAllRecord');
 $router->get('/vacancy/get-all-record', 'VacancyController@getAllRecord');
 $router->get('/service/get-all-record', 'ServiceController@index');
+$router->get('/developement_team/get-all-record', 'DevelopementTeamController@index');
+$router->get('/design_team/get-all-record', 'DesignTeamController@index');
+
 
 
 $router->group(['middleware' => 'auth'], function () use ($router)
@@ -143,7 +146,11 @@ $router->group(['middleware' => 'auth'], function () use ($router)
     $router->post('/service/update/{id}', 'ServiceController@update');
     $router->delete('/service/delete/{id}', 'ServiceController@destroy');
     $router->post('/logout', 'AuthController@logout');
-    $router->get('/developement_team/get-all-record', 'DevelopementTeamController@index');
+    $router->post('/design_team/add', 'DesignTeamController@add');
+    $router->post('/design_team/update/{id}', 'DesignTeamController@update');
+    $router->delete('/design_team/delete/{id}', 'DesignTeamController@destroy');
+
+    
 
 
 });
