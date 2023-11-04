@@ -66,6 +66,10 @@ $router->get('/developement_team/get-all-record', 'DevelopementTeamController@in
 $router->get('/design_team/get-all-record', 'DesignTeamController@index');
 $router->get('/career_enquirires/{id}/download/cv', 'CareerEnquiriesController@downloadCV');
 $router->get('/career_enquirires/{id}/download/cover_letter', 'CareerEnquiriesController@downloadCoverLetter');
+$router->post('/contact/add', 'ContactEnquiriesController@getAdd');
+$router->post('/career_enquirires/add', 'CareerEnquiriesController@add');
+$router->post('/getAquote/add', 'GetAQuoteController@add');
+
 
 
 $router->group(['middleware' => 'auth'], function () use ($router)
@@ -74,13 +78,11 @@ $router->group(['middleware' => 'auth'], function () use ($router)
     $router->post('/clientLogo/add', 'ClientLogoController@store');
     $router->post('/clientLogo/update/{id}', 'ClientLogoController@update');
     $router->delete('/clientLogo/delete/{id}', 'ClientLogoController@destroy');
-    $router->post('/contact/add', 'ContactEnquiriesController@getAdd');
     $router->delete('/contact/delete/{id}', 'ContactEnquiriesController@destroy');
     $router->post('/questions/add', 'questionController@add');
     $router->delete('/questions/delete/{id}', 'questionController@destroy');
     $router->post('/freeConsultaion/add', 'freeConsultationController@add');
     $router->delete('/freeConsultaion/delete/{id}', 'freeConsultationController@destroy');
-    $router->post('/getAquote/add', 'GetAQuoteController@add');
     $router->delete('/getAquote/delete/{id}', 'GetAQuoteController@destroy');
     $router->post('/count/add', 'CountController@add');
     $router->post('/count/update/{id}', 'CountController@update');
@@ -133,7 +135,6 @@ $router->group(['middleware' => 'auth'], function () use ($router)
     $router->delete('/admin_team/delete/{id}', 'AdminTeamController@destroy');
     $router->post('/trainee_team/add', 'TraineeTeamController@add');
     $router->delete('/trainee_team/delete/{id}', 'TraineeTeamController@destroy');
-    $router->post('/career_enquirires/add', 'CareerEnquiriesController@add');
     $router->delete('/career_enquirires/delete/{id}', 'CareerEnquiriesController@destroy');
     $router->post('/contact_details/add', 'ContactDetailsController@getAdd');
     $router->post('/contact_details/update/{id}', 'ContactDetailsController@update');
