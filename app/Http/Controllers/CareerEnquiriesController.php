@@ -32,6 +32,7 @@ class CareerEnquiriesController extends Controller
                 'mobile_no' => $applicant->mobile_no,
                 'technology_choice' => $applicant->technology_choice,
                 'position' => $applicant->position,
+                'date' => $applicant->created_at->toDateString(),
                 'cv' => [
                     'file_name' => $applicant->cv,
                     'download_url' => $cvDownloadUrl,
