@@ -22,14 +22,13 @@ $router->post('/register', 'AuthController@register');
 //$router->post('/login', 'AuthController@login');
 //$router->post('/login', 'LoginController@user_login');
 
-Route::group([
-    'prefix' => 'api'
-],
-function ($router) {
-    Route::post('/login', 'AuthController@login');
-});
+// Route::group([
+//     'prefix' => 'api'
+// ],
+// function ($router) {
+// });
 
-
+Route::post('/login', 'AuthController@login');
 $router->post('/refresh_token', 'AuthController@refresh_token');
 $router->get('/clientLogo/get-all-record', 'ClientLogoController@index');
 $router->get('/contact/get-all-record', 'ContactEnquiriesController@getAllRecord');
