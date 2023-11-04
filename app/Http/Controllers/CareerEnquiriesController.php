@@ -13,41 +13,37 @@ class CareerEnquiriesController extends Controller
 {
     public function show()
     {
-        // Retrieve all applicants from the database
-        $applicants = CareerEnquiries::all();
-    
-        // Process the applicants data
-        $processedApplicants = [];
-    
-        foreach ($applicants as $applicant) {
-            // Generate URLs for downloading the files
-            $cvDownloadUrl = url('/career_enquirires/' . $applicant->id . '/download/cv');
-            $coverLetterDownloadUrl = url('/career_enquirires/' . $applicant->id . '/download/cover_letter');
-    
-            // Append the processed applicant data
-            $processedApplicants[] = [
-                'id' => $applicant->id,
-                'name' => $applicant->name,
-                'email' => $applicant->email,
-                'mobile_no' => $applicant->mobile_no,
-                'technology_choice' => $applicant->technology_choice,
-                'position' => $applicant->position,
-                'date' => $applicant->created_at->toDateString(),
-                'cv' => [
-                    'file_name' => $applicant->cv,
-                    'download_url' => $cvDownloadUrl,
-                ],
-                'cover_letter' => [
-                    'file_name' => $applicant->cover_letter,
-                    'download_url' => $coverLetterDownloadUrl,
-                ],
-                'duration' => $applicant->duration,
-            ];
+        $enq = CareerEnquiries::get();
+        $response = [];
+        foreach ($enq as $item) {
+
+            $data = $item->toArray();
+
+            // $data['id'] = $data['id'];
+            // $data['name'] = $data['name'];
+            // $data['email'] = $data['email'];
+            // $data['mobile_no'] = $data['mobile_no'];
+            // $data['technology_choice'] = $data['technology_choice'];
+            // $data['position'] = $data['position'];
+            $data['date'] = $data['created_at']->toDateString();
+            // $data['duration'] = $data['duration'];
+
+            $cv = $data['cv'];
+            $imagePath ="uploads/cv_files/" . $cv;
+            $base64 = "data:application/pdf;base64," . base64_encode(file_get_contents($imagePath));
+            $data['cv'] = $base64;
+
+
+            $cover_letter = $data['cover_letter'];
+            $imagePath ="uploads/cover_letter_files/" . $cover_letter;
+            $base64 = "data:application/pdf;base64," . base64_encode(file_get_contents($imagePath));
+            $data['cover_letter'] = $base64;
+            $response[] = $data;
         }
     
         // Return the processed applicants data
         return response()->json([
-            'applicants' => $processedApplicants,
+            'applicants' => $response,
         ]);
     }
 
@@ -80,7 +76,7 @@ class CareerEnquiriesController extends Controller
         $decodedFileData = base64_decode($fileData);
         
         // Generate the file name
-        $fileName = $file === 'cv' ? 'cv_' . $applicant->id . '.pdf' : 'cover_letter_' . $applicant->id . '.pdf';
+        $fileName = $file === 'cv' ? 'cv_' . $applicant->cv . '.pdf' : 'cover_letter_' . $applicant->cover_letter . '.pdf';
         
     
         // Set the appropriate Content-Type header
@@ -116,29 +112,65 @@ class CareerEnquiriesController extends Controller
                 return $validator->errors()->all();
     
         }else{
-            $existingRecord = CareerEnquiries::orderBy('id','DESC')->first();
-            $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
+            // $existingRecord = CareerEnquiries::orderBy('id','DESC')->first();
+            // $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
 
-            // Extract the CV and cover letter files from the base64 encoded data
-            $cvFileData = base64_decode($request->input('cv'));
-            $coverLetterFileData = base64_decode($request->input('cover_letter'));
+            // // Extract the CV and cover letter files from the base64 encoded data
+            // $cvFileData = base64_decode($request->input('cv'));
+            // $coverLetterFileData = base64_decode($request->input('cover_letter'));
 
-            // Generate unique file names for the CV and cover letter files
-            $cvFileName = 'cv_' . $recordId . '.pdf';
-            $coverLetterFileName = 'cover_letter_' . $recordId . '.pdf';
+            // // Generate unique file names for the CV and cover letter files
+            // $cvFileName = 'cv_' . $recordId . '.pdf';
+            // $coverLetterFileName = 'cover_letter_' . $recordId . '.pdf';
 
-            $folderPath = "uploads/cv_files/";
-            $folderPath1 = "uploads/cover_letter_files/";
-            // $file = $recordId . '.' .$imageType;
-            $file_dir = $folderPath . $cvFileName;
-            $file_dir1 = $folderPath1 . $coverLetterFileName;
+            // $folderPath = "uploads/cv_files/";
+            // $folderPath1 = "uploads/cover_letter_files/";
+            // // $file = $recordId . '.' .$imageType;
+            // $file_dir = $folderPath . $cvFileName;
+            // $file_dir1 = $folderPath1 . $coverLetterFileName;
 
-            file_put_contents($file_dir, $cvFileData);
+            // file_put_contents($file_dir, $cvFileData);
 
-            file_put_contents($file_dir1, $coverLetterFileData);
-            // Store the CV and cover letter files in the storage path
-            // Storage::put('uploads/cv_files/' . $cvFileName, $cvFileData);
-            // Storage::put('uploads/cover_letter_files/' . $coverLetterFileName, $coverLetterFileData);
+            // file_put_contents($file_dir1, $coverLetterFileData);
+
+
+            $file = $request->input('cv');
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < 18; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            createDirecrotory('/uploads/cv_files');
+            $folderPath = "uploads/cv_files/";                
+            $base64file = explode(";base64,", $file);
+            $explodefile = explode("application/", $base64file[0]);
+            $fileType = $explodefile[1];
+            $file_base64 = base64_decode($base64file[1]);
+    
+            $cvfile = $randomString . '.' . $fileType;
+            $file_dir = $folderPath.$cvfile;
+    
+            file_put_contents($file_dir, $file_base64);
+
+            $cl_file = $request->input('cover_letter');
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < 18; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            createDirecrotory('/uploads/cover_letter_files');
+            $clfolderPath = "uploads/cover_letter_files/";                
+            $clbase64file = explode(";base64,", $cl_file);
+            $clexplodefile = explode("application/", $clbase64file[0]);
+            $clfileType = $clexplodefile[1];
+            $clfile_base64 = base64_decode($clbase64file[1]);
+    
+            $clfile = $randomString . '.' . $clfileType;
+            $clfile_dir = $clfolderPath.$clfile;
+    
+            file_put_contents($clfile_dir, $clfile_base64);
 
             // Create a new applicant record
             $applicant = new CareerEnquiries();
@@ -147,8 +179,8 @@ class CareerEnquiriesController extends Controller
             $applicant->mobile_no = $request->input('mobile_no');
             $applicant->technology_choice = $request->input('technology_choice');
             $applicant->position = $request->input('position');
-            $applicant->cv = $cvFileName;
-            $applicant->cover_letter = $coverLetterFileName;
+            $applicant->cv = $cvfile;
+            $applicant->cover_letter = $clfile;
             $applicant->duration = $request->input('duration');
             $applicant->save();
 
