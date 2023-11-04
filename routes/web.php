@@ -64,7 +64,8 @@ $router->get('/vacancy/get-all-record', 'VacancyController@getAllRecord');
 $router->get('/service/get-all-record', 'ServiceController@index');
 $router->get('/developement_team/get-all-record', 'DevelopementTeamController@index');
 $router->get('/design_team/get-all-record', 'DesignTeamController@index');
-
+$router->get('/career_enquirires/{id}/download/cv', 'CareerEnquiriesController@downloadCV');
+$router->get('/career_enquirires/{id}/download/cover_letter', 'CareerEnquiriesController@downloadCoverLetter');
 
 
 $router->group(['middleware' => 'auth'], function () use ($router)
@@ -132,8 +133,6 @@ $router->group(['middleware' => 'auth'], function () use ($router)
     $router->delete('/admin_team/delete/{id}', 'AdminTeamController@destroy');
     $router->post('/trainee_team/add', 'TraineeTeamController@add');
     $router->delete('/trainee_team/delete/{id}', 'TraineeTeamController@destroy');
-    $router->get('/career_enquirires/{id}/download/cv', 'CareerEnquiriesController@downloadCV');
-    $router->get('/career_enquirires/{id}/download/cover_letter', 'CareerEnquiriesController@downloadCoverLetter');
     $router->post('/career_enquirires/add', 'CareerEnquiriesController@add');
     $router->delete('/career_enquirires/delete/{id}', 'CareerEnquiriesController@destroy');
     $router->post('/contact_details/add', 'ContactDetailsController@getAdd');
