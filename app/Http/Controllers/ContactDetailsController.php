@@ -132,7 +132,7 @@ class ContactDetailsController extends Controller
             $image = $data['image'];
             $imagePath = "uploads/contactDetails/" . $image;
             $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
-            $data['mou_image'] = $base64;
+            $data['image'] = $base64;
             $response[] = $data;
         }
 
