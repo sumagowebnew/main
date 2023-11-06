@@ -77,41 +77,63 @@ class ContactDetailsController extends Controller
             return $this->responseApi($update_data,'Data Updated','success',200);
     }
 
+    // public function getAllRecord()
+    // {
+    //     // Get all data from the database
+    //     $all_data = ContactDetails::get();
+
+    //     $response = [];
+
+    //     foreach ($all_data as $item) {
+    //         // $no = [];
+    //         // $mail=[];
+    //         // $add=[];
+    //         $data = $item->toArray();
+    //         $mobile_no = $data['mobile_no'];
+    //         $email_id = $data['email_id'];
+    //         $address = $data['address'];
+    //         // json_decode(json_encode($mobile_no), true);
+    //         // foreach (json_decode($mobile_no) as $key => $value){ 
+    //         //     array_push($no,$value);
+    //         // }
+
+    //         // foreach (json_decode($email_id) as $key => $value){ 
+    //         //     array_push($mail,$value);
+    //         // }
+
+    //         // foreach (json_decode($address) as $key => $value){ 
+    //         //     array_push($add,$value);
+    //         // }
+    //         // $response['id'] = $data['id'];
+    //         // $response['email_id'] = $data['email_id'];
+    //         // $response['address'] = $data['address'];
+    //         // $response['mobile_no'] = $data['mobile_no'];
+    //         // $response['title'] = $data['title'];;
+    //         // $response['created_at'] = $data['created_at'];
+    //         // $response['updated_at'] = $data['updated_at'];
+    //         // $address = $data['address'];
+    //         $response[] = $data;
+
+    //     }
+
+    //     return response()->json($response);
+    // }
+
+
     public function getAllRecord()
     {
         // Get all data from the database
-        $all_data = ContactDetails::get();
+        $mou = ContactDetails::get();
 
         $response = [];
 
-        foreach ($all_data as $item) {
-            // $no = [];
-            // $mail=[];
-            // $add=[];
+        foreach ($mou as $item) {
             $data = $item->toArray();
-            $mobile_no = $data['mobile_no'];
-            $email_id = $data['email_id'];
-            $address = $data['address'];
-            // json_decode(json_encode($mobile_no), true);
-            // foreach (json_decode($mobile_no) as $key => $value){ 
-            //     array_push($no,$value);
-            // }
-
-            // foreach (json_decode($email_id) as $key => $value){ 
-            //     array_push($mail,$value);
-            // }
-
-            // foreach (json_decode($address) as $key => $value){ 
-            //     array_push($add,$value);
-            // }
-            $response['id'] = $data['id'];
-            $response['email_id'] = $data['email_id'];
-            $response['address'] = $data['address'];
-            $response['mobile_no'] = $data['mobile_no'];
-            $response['title'] = $data['title'];;
-            $response['created_at'] = $data['created_at'];
-            $response['updated_at'] = $data['updated_at'];
-            // $address = $data['address'];
+            $image = $data['image'];
+            $imagePath = "uploads/contactDetails/" . $image;
+            $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
+            $data['mou_image'] = $base64;
+            $response[] = $data;
         }
 
         return response()->json($response);
