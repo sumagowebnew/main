@@ -25,9 +25,8 @@ class CareerEnquiriesController extends Controller
             // $data['mobile_no'] = $data['mobile_no'];
             // $data['technology_choice'] = $data['technology_choice'];
             // $data['position'] = $data['position'];
-            $data['date'] = $data['created_at']->toDateString();
+            $data['date'] = $data['created_at'];
             // $data['duration'] = $data['duration'];
-
             $cv = $data['cv'];
             $imagePath ="uploads/cv_files/" . $cv;
             $base64 = "data:application/pdf;base64," . base64_encode(file_get_contents($imagePath));
