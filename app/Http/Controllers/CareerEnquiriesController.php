@@ -25,7 +25,7 @@ class CareerEnquiriesController extends Controller
             // $data['mobile_no'] = $data['mobile_no'];
             // $data['technology_choice'] = $data['technology_choice'];
             // $data['position'] = $data['position'];
-            $data['date'] = $data['created_at']->toDateString();
+            $data['date'] = $data['created_at'];
             // $data['duration'] = $data['duration'];
 
             $cv = $data['cv'];
