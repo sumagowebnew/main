@@ -50,29 +50,29 @@ class ContactDetailsController extends Controller
         $response = [];
 
         foreach ($all_data as $item) {
-            $no = [];
-            $mail=[];
-            $add=[];
+            // $no = [];
+            // $mail=[];
+            // $add=[];
             $data = $item->toArray();
             $mobile_no = $data['mobile_no'];
             $email_id = $data['email_id'];
             $address = $data['address'];
             // json_decode(json_encode($mobile_no), true);
-            foreach (json_decode($mobile_no) as $key => $value){ 
-                array_push($no,$value);
-            }
+            // foreach (json_decode($mobile_no) as $key => $value){ 
+            //     array_push($no,$value);
+            // }
 
-            foreach (json_decode($email_id) as $key => $value){ 
-                array_push($mail,$value);
-            }
+            // foreach (json_decode($email_id) as $key => $value){ 
+            //     array_push($mail,$value);
+            // }
 
-            foreach (json_decode($address) as $key => $value){ 
-                array_push($add,$value);
-            }
+            // foreach (json_decode($address) as $key => $value){ 
+            //     array_push($add,$value);
+            // }
             $response['id'] = $data['id'];
-            $response['email_id'] = $mail;
-            $response['address'] = $add;
-            $response['mobile_no'] = $no;
+            $response['email_id'] = $data['email_id'];
+            $response['address'] = $data['address'];
+            $response['mobile_no'] = $data['mobile_no'];;
             $response['created_at'] = $data['created_at'];
             $response['updated_at'] = $data['updated_at'];
             // $address = $data['address'];
