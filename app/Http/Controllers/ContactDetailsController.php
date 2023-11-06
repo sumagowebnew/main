@@ -27,17 +27,21 @@ class ContactDetailsController extends Controller
             $contactDetails = new ContactDetails();
             $existingRecord = contactDetails::orderBy('id','DESC')->first();
             $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
-            $img_path = $request->photo;
+            $img_path = $request->image;
             $folderPath = "uploads/contactDetails/";
             
+            // $base64Image = explode(";base64,", $img_path);
+            // $explodeImage = explode("image/", $base64Image[0]);
+            // $imageType = $explodeImage[1];
+            // $image_base64 = base64_decode($base64Image[1]);
+
             $base64Image = explode(";base64,", $img_path);
             $explodeImage = explode("image/", $base64Image[0]);
             $imageType = $explodeImage[1];
             $image_base64 = base64_decode($base64Image[1]);
-
             $file = $recordId . '.' . $imageType;
             $file_dir = $folderPath . $file;
-
+           
             file_put_contents($file_dir, $image_base64);
             $contactDetails->image = $file;
             $contactDetails->mobile_no = $request->mobile_no;
@@ -53,7 +57,7 @@ class ContactDetailsController extends Controller
     {
         
             $contact_details = ContactDetails::find($id);
-            $img_path = $request->photo;
+            $img_path = $request->image;
             $folderPath = "uploads/contactDetails/";
             $base64Image = explode(";base64,", $img_path);
             $explodeImage = explode("image/", $base64Image[0]);
