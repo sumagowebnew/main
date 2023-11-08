@@ -14,15 +14,20 @@ class SliderController extends Controller
         // Get all data from the database
         $recog = Slider::get();
         $response = [];
-        foreach ($recog as $item) {
-            $data = $item->toArray();
-            $image = $data['image'];
-            $imagePath = "uploads/slider/" . $image;
-            $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
-            $data['image'] = $base64;
-            $response[] = $data;
+        try{
+            foreach ($recog as $item) {
+                $data = $item->toArray();
+                $image = $data['image'];
+                $imagePath = "uploads/slider/" . $image;
+                $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
+                $data['image'] = $base64;
+                $response[] = $data;
+            }
+            return response()->json($response);
         }
-        return response()->json($response);
+        catch(\Exception $e){
+                return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+        }
     }
 
     public function add(Request $request)
