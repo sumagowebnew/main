@@ -28,7 +28,9 @@ class ContactDetailsController extends Controller
             $existingRecord = contactDetails::orderBy('id','DESC')->first();
             $recordId = $existingRecord ? $existingRecord->id + 1 : 1;
             $img_path = $request->image;
-            createDirecrotory('/uploads/contactDetails/');
+            if (!file_exists('uploads/contactDetails/')) {
+                mkdir('uploads/contactDetails/', 0777, true);
+            }
             $folderPath = "uploads/contactDetails/";
             
             // $base64Image = explode(";base64,", $img_path);
