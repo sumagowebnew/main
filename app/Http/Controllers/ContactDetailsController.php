@@ -126,17 +126,22 @@ class ContactDetailsController extends Controller
         $mou = ContactDetails::get();
 
         $response = [];
+        try{
 
-        foreach ($mou as $item) {
-            $data = $item->toArray();
-            $image = $data['image'];
-            $imagePath = "uploads/contactDetails/" . $image;
-            $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
-            $data['image'] = $base64;
-            $response[] = $data;
+            foreach ($mou as $item) {
+                $data = $item->toArray();
+                $image = $data['image'];
+                $imagePath = "uploads/contactDetails/" . $image;
+                $base64 = "data:image/png;base64," . base64_encode(file_get_contents($imagePath));
+                $data['image'] = $base64;
+                $response[] = $data;
+            }
+
+            return response()->json($response);
+        }catch (\Exception $e)
+        {
+            return response()->json(['error'=> $e->getMessage()],500);
         }
-
-        return response()->json($response);
     }
 
     public function destroy($id)
