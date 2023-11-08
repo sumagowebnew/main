@@ -79,6 +79,47 @@ class DevelopementTeamController extends Controller
             }
     }
 
+    public function update(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'designation_id' => 'required|numeric',
+            'name'=>'required',
+            'qualification' => 'required',
+            'experience'=>'required',
+            'photo'=>'required',
+            ]);
+        
+            if ($validator->fails())
+            {
+                return $validator->errors()->all();
+            }else{
+                $teamDetail = DevelopementTeam::find($id);
+                $teamDetail->name = $request->input('name');
+                
+                $teamDetail->designation_id = $request->input('designation_id');
+                $teamDetail->qualification = $request->input('qualification');
+                $teamDetail->experience = $request->input('experience');
+                
+                $img_path = $request->photo;
+                $folderPath = "uploads/developement_team/";
+                
+                $base64Image = explode(";base64,", $img_path);
+                $explodeImage = explode("image/", $base64Image[0]);
+                $imageType = $explodeImage[1];
+                $image_base64 = base64_decode($base64Image[1]);
+
+                $file = $id .'_updated'. '.' . $imageType;
+                $file_dir = $folderPath . $file;
+
+                file_put_contents($file_dir, $image_base64);
+                $teamDetail->photo = $file;
+
+                $teamDetail->save();
+
+                return response()->json(['status' => 'Success', 'message' => 'Updated successfully','statusCode'=>'200']);
+            }
+    }
+
     public function destroy($id)
     {
         $all_data=[];

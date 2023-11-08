@@ -68,6 +68,7 @@ $router->get('/career_enquirires/{id}/download/cover_letter', 'CareerEnquiriesCo
 $router->post('/contact/add', 'ContactEnquiriesController@getAdd');
 $router->post('/career_enquirires/add', 'CareerEnquiriesController@add');
 $router->post('/getAquote/add', 'GetAQuoteController@add');
+
 $router->get('/slider/get_all_records', 'SliderController@index');
 
 
@@ -130,6 +131,7 @@ $router->group(['middleware' => 'auth'], function () use ($router)
     $router->post('/achievement/add', 'AchievementsController@add');
     $router->delete('/achievement/delete/{id}', 'AchievementsController@destroy');
     $router->post('/developement_team/add', 'DevelopementTeamController@add');
+    $router->post('/developement_team/update/{id}', 'DevelopementTeamController@update');
     $router->delete('/developement_team/delete/{id}', 'DevelopementTeamController@destroy');
     $router->post('/admin_team/add', 'AdminTeamController@add');
     $router->delete('/admin_team/delete/{id}', 'AdminTeamController@destroy');
