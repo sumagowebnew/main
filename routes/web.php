@@ -154,5 +154,7 @@ $router->group(['middleware' => 'auth'], function () use ($router)
     $router->post('/slider/add', 'SliderController@add');
     $router->post('/slider/update/{id}', 'SliderController@update');
     $router->delete('/slider/delete/{id}', 'SliderController@destroy');
-
+    $router->post('/intern-joining/add', 'StudentInfoController@add');
+    // $router->post('/portfolio/update/{id}', 'PortfolioController@update');
+    // $router->delete('/portfolio/delete/{id}', 'PortfolioController@destroy');
 });
